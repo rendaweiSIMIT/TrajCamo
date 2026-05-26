@@ -383,7 +383,7 @@ Its input is the concatenation of the velocity time series $\dot{\tau}_i$, the s
 Spectral grouping uses normalized cuts on the affinity $A_{ij}$ with spatial bandwidth set to the median pairwise spatial distance, and the number of clusters $K$ is chosen via the eigengap heuristic on the top-$30$ eigenvalues, capped at $K\leq12$.
 A cluster is retained only if it is spatially connected under a $16$-pixel morphological dilation, its internal consistency score satisfies $\kappa(C)\geq 0.6$, and its contrast-to-neighborhood ratio exceeds $1.2$.
 
-The MLLM agent is Qwen2.5-VL-7B~\cite{qwenvl} with rank-$16$ LoRA adapters on the attention and feed-forward layers.
+The MLLM agent is InternVL3-8B~\cite{internvl3} with rank-$16$ LoRA adapters on the attention and feed-forward layers; our framework is backbone-agnostic and we additionally report results with Qwen2.5-VL-7B~\cite{qwenvl} as a backup configuration in the supplementary.
 The action vocabulary $\mathcal{A}=\{\textsc{Select}(k),\textsc{Add-Pos}(f,x,y),\textsc{Add-Neg}(f,x,y),\textsc{Terminate}\}$ is encoded as natural-language tokens that the model emits autoregressively, with coordinates $(x,y)$ in $[0,1]^2$ and frame indices $f$ encoded as integer tokens within the visible thumbnail set.
 The maximum step budget is $K_{\max}=5$, and the cluster overview presented to the agent at each step shows the top-$12$ candidate clusters ranked by $\kappa$ overlaid on a $4$-frame thumbnail strip.
 The promptable segmentation backbone is SAM2-large~\cite{sam2}, kept frozen.
@@ -820,6 +820,10 @@ DINOv2: Learning Robust Visual Features without Supervision, TMLR 2024.\newline
 \bibitem{qwenvl}
 Qwen2.5-VL Technical Report, 2024.\newline
 \url{https://arxiv.org/abs/2502.13923}
+
+\bibitem{internvl3}
+InternVL3: Exploring Advanced Training and Test-Time Recipes for Open-Source Multimodal Models, 2025.\newline
+\url{https://arxiv.org/abs/2504.10479}
 
 \bibitem{cad2016}
 It's Moving! A Probabilistic Model for Causal Motion Segmentation in Moving Camera Videos, ECCV 2016 (CAD2016 dataset).\newline
