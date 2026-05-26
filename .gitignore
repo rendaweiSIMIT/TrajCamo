@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Model weights (too big for git, store on data disk)
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Dataset (data disk only)
+VOSdataset/
+**/MoCA*
+**/CAD*
+**/CAMotion*
+
+# Cached intermediate artifacts (regenerable)
+_traj_cache/
+_dino_cache/
+main_outputs/
+outputs/
+feasibility/
+feasibility_fair/
+
+# Logs
+*.log
+_logs/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# LaTeX build
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
