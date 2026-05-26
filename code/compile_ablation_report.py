@@ -29,9 +29,13 @@ SLTNET = {"F_w": 0.357, "MAE": 0.0300, "S_a": 0.656, "E_p": 0.785}
 def load_all():
     rows = []
     for p in sorted(ABLATIONS_DIR.glob("*.json")):
+        if p.stem in ("failure_diagnosis", "smoke"):
+            continue
         try:
             with open(p) as f:
                 d = json.load(f)
+            if not isinstance(d, dict) or "aggregates" not in d:
+                continue
             rows.append((p.stem, d))
         except Exception:
             continue
@@ -147,7 +151,7 @@ def main():
 
     OUT_MD.write_text("\n".join(lines))
     print(f"[written] {OUT_MD}", flush=True)
-    print(f"[wc] {len(lines)} lines, {sum(len(s.splitlines()) for s in sections.values() if isinstance(s, tuple))} sections", flush=True)
+    print(f"[wc] {len(lines)} lines, {sum(1 for _, runs in sections.values() if runs)} non-empty sections", flush=True)
 
 
 if __name__ == "__main__":

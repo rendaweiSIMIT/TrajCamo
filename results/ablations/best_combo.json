@@ -1,0 +1,3073 @@
+{
+  "config": {
+    "tag": "best_combo",
+    "feature": "raw_velocity",
+    "K": 24,
+    "n_prompt_points": 8,
+    "min_move_px": 2.0,
+    "prompt_frames": "0",
+    "save_masks": false,
+    "dataset": "/root/autodl-tmp/VOSdataset",
+    "traj_cache": "/root/autodl-tmp/VOSdataset/_traj_cache",
+    "out": "/root/autodl-tmp/VOScode/ablations",
+    "ckpt": "/root/autodl-tmp/sam3_base_weights/sam3.pt"
+  },
+  "aggregates": {
+    "oracle": {
+      "F_w": 0.3785854755976024,
+      "MAE": 0.010992729377691815,
+      "S_a": 0.6382561525427624,
+      "E_p": 0.8400467320424002,
+      "n_videos": 16
+    },
+    "heuristic": {
+      "F_w": 0.09924244476213255,
+      "MAE": 0.023095383426437747,
+      "S_a": 0.5022880253228212,
+      "E_p": 0.7473695710735261,
+      "n_videos": 16
+    }
+  },
+  "rows": [
+    {
+      "name": "arctic_fox",
+      "n_frames": 30,
+      "n_traj_total": 2297,
+      "n_traj_dynamic": 2270,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1751,
+          "iou_oracle": 0.1494989482486053,
+          "consistency": 0.9858975020827483
+        },
+        {
+          "k": 1,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.40037040618081454
+        },
+        {
+          "k": 2,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.49037305827301403
+        },
+        {
+          "k": 3,
+          "size": 36,
+          "iou_oracle": 0.0,
+          "consistency": 0.8227129487961518
+        },
+        {
+          "k": 4,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.030347112391547748
+        },
+        {
+          "k": 5,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.35828443685166456
+        },
+        {
+          "k": 6,
+          "size": 48,
+          "iou_oracle": 0.0,
+          "consistency": 0.6062046357350357
+        },
+        {
+          "k": 7,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": -0.06443231859706411
+        },
+        {
+          "k": 8,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.30738745800967304
+        },
+        {
+          "k": 9,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": -0.172034286867897
+        },
+        {
+          "k": 10,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.2911265342067717
+        },
+        {
+          "k": 11,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.4695155570212637
+        },
+        {
+          "k": 12,
+          "size": 55,
+          "iou_oracle": 0.0,
+          "consistency": 0.7260267667625635
+        },
+        {
+          "k": 13,
+          "size": 103,
+          "iou_oracle": 0.0,
+          "consistency": 0.8133265315913355
+        },
+        {
+          "k": 15,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": -0.46444027278073463
+        },
+        {
+          "k": 16,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.11200160878495224
+        },
+        {
+          "k": 17,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.3414693868750043
+        },
+        {
+          "k": 18,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.4157149186144825
+        },
+        {
+          "k": 19,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": -2.00417010095089
+        },
+        {
+          "k": 20,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": -0.45308823462721337
+        },
+        {
+          "k": 21,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.4037397238030258
+        },
+        {
+          "k": 22,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.8760954092114224
+        },
+        {
+          "k": 23,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.36852887570064585
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1751,
+          "iou_oracle": 0.1494989482486053,
+          "consistency": 0.9858975020827483
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.02351088116663942,
+          "MAE": 0.02185546870653828,
+          "S_a": 0.47303681563557975,
+          "E_p": 0.8840714036492474,
+          "n_frames": 30
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1751,
+          "iou_oracle": 0.1494989482486053,
+          "consistency": 0.9858975020827483
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.02351088116663942,
+          "MAE": 0.02185546870653828,
+          "S_a": 0.47303681563557975,
+          "E_p": 0.8840714036492474,
+          "n_frames": 30
+        }
+      },
+      "seconds": 13.3
+    },
+    {
+      "name": "arctic_fox_3",
+      "n_frames": 35,
+      "n_traj_total": 838,
+      "n_traj_dynamic": 789,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.7799985477831186
+        },
+        {
+          "k": 1,
+          "size": 54,
+          "iou_oracle": 0.09432332018087036,
+          "consistency": 0.9729538826949031
+        },
+        {
+          "k": 2,
+          "size": 62,
+          "iou_oracle": 0.0,
+          "consistency": 0.860508839399998
+        },
+        {
+          "k": 3,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.691432074090776
+        },
+        {
+          "k": 4,
+          "size": 13,
+          "iou_oracle": 0.0,
+          "consistency": 0.8312281582161046
+        },
+        {
+          "k": 5,
+          "size": 87,
+          "iou_oracle": 0.0,
+          "consistency": 0.8901103212459278
+        },
+        {
+          "k": 6,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.9316511278806253
+        },
+        {
+          "k": 7,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.6467389276260076
+        },
+        {
+          "k": 8,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": 0.7870393591852094
+        },
+        {
+          "k": 9,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.7574948026830928
+        },
+        {
+          "k": 10,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.880831633317482
+        },
+        {
+          "k": 11,
+          "size": 66,
+          "iou_oracle": 0.06647495314144863,
+          "consistency": 0.9731131570624881
+        },
+        {
+          "k": 12,
+          "size": 23,
+          "iou_oracle": 0.0,
+          "consistency": 0.6707977229344302
+        },
+        {
+          "k": 13,
+          "size": 71,
+          "iou_oracle": 0.039927737340943605,
+          "consistency": 0.9769022849860307
+        },
+        {
+          "k": 14,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.7860013682221555
+        },
+        {
+          "k": 15,
+          "size": 31,
+          "iou_oracle": 0.0,
+          "consistency": 0.7091097420834567
+        },
+        {
+          "k": 16,
+          "size": 73,
+          "iou_oracle": 0.022549730208585004,
+          "consistency": 0.979935108533032
+        },
+        {
+          "k": 17,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.6484368215542834
+        },
+        {
+          "k": 18,
+          "size": 47,
+          "iou_oracle": 0.0,
+          "consistency": 0.8733726369917116
+        },
+        {
+          "k": 19,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.7347339759283245
+        },
+        {
+          "k": 20,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.7417417871311033
+        },
+        {
+          "k": 21,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.7926656237785253
+        },
+        {
+          "k": 22,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.8570283538380183
+        },
+        {
+          "k": 23,
+          "size": 25,
+          "iou_oracle": 0.0,
+          "consistency": 0.8131905354983773
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 54,
+          "iou_oracle": 0.09432332018087036,
+          "consistency": 0.9729538826949031
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.01059033978464348,
+          "S_a": 0.4775739062223871,
+          "E_p": 0.6316482451966952,
+          "n_frames": 35
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 16,
+          "size": 73,
+          "iou_oracle": 0.022549730208585004,
+          "consistency": 0.979935108533032
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.005921347971473421,
+          "S_a": 0.4859310446066179,
+          "E_p": 0.9689423726376266,
+          "n_frames": 35
+        }
+      },
+      "seconds": 14.2
+    },
+    {
+      "name": "black_cat_1",
+      "n_frames": 73,
+      "n_traj_total": 1859,
+      "n_traj_dynamic": 1801,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1249,
+          "iou_oracle": 0.07887288383341749,
+          "consistency": 0.9780806649696846
+        },
+        {
+          "k": 1,
+          "size": 86,
+          "iou_oracle": 0.0,
+          "consistency": 0.7606951282180818
+        },
+        {
+          "k": 2,
+          "size": 38,
+          "iou_oracle": 0.0,
+          "consistency": 0.7326751414734692
+        },
+        {
+          "k": 3,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.22720983770983516
+        },
+        {
+          "k": 4,
+          "size": 44,
+          "iou_oracle": 0.0,
+          "consistency": 0.5960841648499647
+        },
+        {
+          "k": 5,
+          "size": 23,
+          "iou_oracle": 0.01216931216931217,
+          "consistency": -0.19863439893284784
+        },
+        {
+          "k": 6,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.33970570596395144
+        },
+        {
+          "k": 7,
+          "size": 26,
+          "iou_oracle": 0.0,
+          "consistency": 0.4006287101559328
+        },
+        {
+          "k": 8,
+          "size": 25,
+          "iou_oracle": 0.0,
+          "consistency": 0.24566877245080565
+        },
+        {
+          "k": 9,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.3069783417088775
+        },
+        {
+          "k": 10,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.4414074208772102
+        },
+        {
+          "k": 11,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.746807095843057
+        },
+        {
+          "k": 12,
+          "size": 14,
+          "iou_oracle": 0.0,
+          "consistency": 0.26886667385754126
+        },
+        {
+          "k": 13,
+          "size": 30,
+          "iou_oracle": 0.0,
+          "consistency": -0.4368649115193295
+        },
+        {
+          "k": 14,
+          "size": 14,
+          "iou_oracle": 0.0,
+          "consistency": 0.5178458688900486
+        },
+        {
+          "k": 15,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.5013626070535069
+        },
+        {
+          "k": 16,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.35383734803343736
+        },
+        {
+          "k": 17,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.5431428954314808
+        },
+        {
+          "k": 18,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.6261799635266696
+        },
+        {
+          "k": 19,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.283911793724987
+        },
+        {
+          "k": 20,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.39775667349912647
+        },
+        {
+          "k": 21,
+          "size": 23,
+          "iou_oracle": 0.0,
+          "consistency": 0.5578897999316541
+        },
+        {
+          "k": 22,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.3393271357804687
+        },
+        {
+          "k": 23,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": 0.45648145973408893
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1249,
+          "iou_oracle": 0.07887288383341749,
+          "consistency": 0.9780806649696846
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.5916235521722183,
+          "MAE": 0.007659876812408895,
+          "S_a": 0.7141646742845873,
+          "E_p": 0.8326556780408665,
+          "n_frames": 73
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1249,
+          "iou_oracle": 0.07887288383341749,
+          "consistency": 0.9780806649696846
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.5916235521722183,
+          "MAE": 0.007659876812408895,
+          "S_a": 0.7141646742845873,
+          "E_p": 0.8326556780408665,
+          "n_frames": 73
+        }
+      },
+      "seconds": 29.6
+    },
+    {
+      "name": "copperhead_snake",
+      "n_frames": 83,
+      "n_traj_total": 2036,
+      "n_traj_dynamic": 2036,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 244,
+          "iou_oracle": 0.006605762473647224,
+          "consistency": 0.8696420459861125
+        },
+        {
+          "k": 1,
+          "size": 52,
+          "iou_oracle": 0.0,
+          "consistency": 0.7199424727397568
+        },
+        {
+          "k": 2,
+          "size": 190,
+          "iou_oracle": 0.20422900952145417,
+          "consistency": 0.9033086462588101
+        },
+        {
+          "k": 3,
+          "size": 41,
+          "iou_oracle": 0.0,
+          "consistency": 0.9264902720371081
+        },
+        {
+          "k": 4,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.46199303923397317
+        },
+        {
+          "k": 5,
+          "size": 244,
+          "iou_oracle": 0.03515174435095018,
+          "consistency": 0.9327834274854401
+        },
+        {
+          "k": 6,
+          "size": 25,
+          "iou_oracle": 0.0,
+          "consistency": 0.4876867005416823
+        },
+        {
+          "k": 7,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": -0.4958292009450005
+        },
+        {
+          "k": 8,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": 0.6298003315287254
+        },
+        {
+          "k": 9,
+          "size": 74,
+          "iou_oracle": 0.0,
+          "consistency": 0.8532316212832025
+        },
+        {
+          "k": 10,
+          "size": 239,
+          "iou_oracle": 0.14436105476673428,
+          "consistency": 0.9109309548892202
+        },
+        {
+          "k": 11,
+          "size": 140,
+          "iou_oracle": 0.0,
+          "consistency": 0.938045280083848
+        },
+        {
+          "k": 12,
+          "size": 129,
+          "iou_oracle": 0.00021686746987951806,
+          "consistency": 0.8965976248040212
+        },
+        {
+          "k": 13,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.2940450101174691
+        },
+        {
+          "k": 14,
+          "size": 66,
+          "iou_oracle": 0.0,
+          "consistency": 0.8041073183895778
+        },
+        {
+          "k": 15,
+          "size": 38,
+          "iou_oracle": 0.0,
+          "consistency": 0.5312149267451123
+        },
+        {
+          "k": 16,
+          "size": 133,
+          "iou_oracle": 0.044758185641333735,
+          "consistency": 0.8349206140726011
+        },
+        {
+          "k": 17,
+          "size": 29,
+          "iou_oracle": 0.0,
+          "consistency": 0.5853239198040304
+        },
+        {
+          "k": 18,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": 0.6820753718919301
+        },
+        {
+          "k": 19,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": 0.6350685345732849
+        },
+        {
+          "k": 20,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.5567364647328124
+        },
+        {
+          "k": 21,
+          "size": 187,
+          "iou_oracle": 0.08457051961823966,
+          "consistency": 0.914025509935837
+        },
+        {
+          "k": 22,
+          "size": 47,
+          "iou_oracle": 0.0,
+          "consistency": 0.6914797952538887
+        },
+        {
+          "k": 23,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.6104772722971098
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 2,
+          "size": 190,
+          "iou_oracle": 0.20422900952145417,
+          "consistency": 0.9033086462588101
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.04128198751495584,
+          "MAE": 0.015416026104196727,
+          "S_a": 0.48623016899821303,
+          "E_p": 0.7012875060144622,
+          "n_frames": 83
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 11,
+          "size": 140,
+          "iou_oracle": 0.0,
+          "consistency": 0.938045280083848
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.0173784329679357,
+          "S_a": 0.4751342776162027,
+          "E_p": 0.7802935343487125,
+          "n_frames": 83
+        }
+      },
+      "seconds": 34.6
+    },
+    {
+      "name": "flower_crab_spider_0",
+      "n_frames": 40,
+      "n_traj_total": 2253,
+      "n_traj_dynamic": 433,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 46,
+          "iou_oracle": 0.0,
+          "consistency": 0.8926750554867089
+        },
+        {
+          "k": 1,
+          "size": 62,
+          "iou_oracle": 0.0,
+          "consistency": 0.9645260446623168
+        },
+        {
+          "k": 2,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.6277818030407206
+        },
+        {
+          "k": 3,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.48413088875880206
+        },
+        {
+          "k": 5,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.5495222731682852
+        },
+        {
+          "k": 6,
+          "size": 106,
+          "iou_oracle": 0.0,
+          "consistency": 0.9515875198970953
+        },
+        {
+          "k": 8,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.6400374966761553
+        },
+        {
+          "k": 9,
+          "size": 13,
+          "iou_oracle": 0.00036231884057971015,
+          "consistency": 0.3491046684836482
+        },
+        {
+          "k": 10,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.4340322376889104
+        },
+        {
+          "k": 11,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.6693806949228148
+        },
+        {
+          "k": 12,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.532040274626292
+        },
+        {
+          "k": 13,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.5630839882732692
+        },
+        {
+          "k": 14,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.8608815920352376
+        },
+        {
+          "k": 15,
+          "size": 10,
+          "iou_oracle": 0.09657245941070355,
+          "consistency": 0.5033002998669838
+        },
+        {
+          "k": 16,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.4822337956238756
+        },
+        {
+          "k": 17,
+          "size": 5,
+          "iou_oracle": 0.06000800106680891,
+          "consistency": 0.6946358441438717
+        },
+        {
+          "k": 18,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.6652512944798261
+        },
+        {
+          "k": 19,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.3863730736860792
+        },
+        {
+          "k": 20,
+          "size": 6,
+          "iou_oracle": 0.037915881983678595,
+          "consistency": 0.5180796979791633
+        },
+        {
+          "k": 21,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.8810365863509008
+        },
+        {
+          "k": 22,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.632796771912939
+        },
+        {
+          "k": 23,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.5160907088919713
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 15,
+          "size": 10,
+          "iou_oracle": 0.09657245941070355,
+          "consistency": 0.5033002998669838
+        },
+        "n_prompts_per_frame": [
+          3
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0006379136934747725,
+          "MAE": 0.0318416612688452,
+          "S_a": 0.45912891887496043,
+          "E_p": 0.7890232162705466,
+          "n_frames": 40
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 62,
+          "iou_oracle": 0.0,
+          "consistency": 0.9645260446623168
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.00014115225505593212,
+          "MAE": 0.05350048840045929,
+          "S_a": 0.4348144866170024,
+          "E_p": 0.8758332379126953,
+          "n_frames": 40
+        }
+      },
+      "seconds": 16.4
+    },
+    {
+      "name": "flower_crab_spider_1",
+      "n_frames": 44,
+      "n_traj_total": 2277,
+      "n_traj_dynamic": 2135,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 162,
+          "iou_oracle": 0.0,
+          "consistency": 0.7901850370047394
+        },
+        {
+          "k": 1,
+          "size": 59,
+          "iou_oracle": 0.0,
+          "consistency": 0.822929320653039
+        },
+        {
+          "k": 2,
+          "size": 35,
+          "iou_oracle": 0.0,
+          "consistency": 0.578107417825906
+        },
+        {
+          "k": 3,
+          "size": 114,
+          "iou_oracle": 0.0,
+          "consistency": 0.8685180778832198
+        },
+        {
+          "k": 4,
+          "size": 89,
+          "iou_oracle": 0.0,
+          "consistency": 0.6607271987356552
+        },
+        {
+          "k": 5,
+          "size": 80,
+          "iou_oracle": 0.0,
+          "consistency": 0.5951181694700807
+        },
+        {
+          "k": 6,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.7099800978206117
+        },
+        {
+          "k": 7,
+          "size": 174,
+          "iou_oracle": 0.09670174271097617,
+          "consistency": 0.8637368674060952
+        },
+        {
+          "k": 8,
+          "size": 16,
+          "iou_oracle": 0.4700865265760198,
+          "consistency": 0.6342627070409155
+        },
+        {
+          "k": 9,
+          "size": 53,
+          "iou_oracle": 0.0,
+          "consistency": 0.22899369214602572
+        },
+        {
+          "k": 10,
+          "size": 111,
+          "iou_oracle": 0.15857516910320751,
+          "consistency": 0.7468361807498292
+        },
+        {
+          "k": 11,
+          "size": 97,
+          "iou_oracle": 0.0,
+          "consistency": 0.6585449581210366
+        },
+        {
+          "k": 12,
+          "size": 43,
+          "iou_oracle": 0.0,
+          "consistency": 0.38059903402053386
+        },
+        {
+          "k": 13,
+          "size": 144,
+          "iou_oracle": 0.0,
+          "consistency": 0.7017416518888202
+        },
+        {
+          "k": 14,
+          "size": 36,
+          "iou_oracle": 0.0,
+          "consistency": 0.0786020997104977
+        },
+        {
+          "k": 15,
+          "size": 228,
+          "iou_oracle": 0.0,
+          "consistency": 0.7681812577848832
+        },
+        {
+          "k": 16,
+          "size": 88,
+          "iou_oracle": 0.06374525616698293,
+          "consistency": 0.6454910766799782
+        },
+        {
+          "k": 17,
+          "size": 222,
+          "iou_oracle": 0.0,
+          "consistency": 0.8421304167170178
+        },
+        {
+          "k": 18,
+          "size": 104,
+          "iou_oracle": 0.03216180371352785,
+          "consistency": 0.7748106315251554
+        },
+        {
+          "k": 19,
+          "size": 66,
+          "iou_oracle": 0.0,
+          "consistency": 0.6824697426310218
+        },
+        {
+          "k": 20,
+          "size": 63,
+          "iou_oracle": 0.0,
+          "consistency": 0.5452657271309229
+        },
+        {
+          "k": 21,
+          "size": 41,
+          "iou_oracle": 0.0,
+          "consistency": 0.5871606708213383
+        },
+        {
+          "k": 22,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.7251303172358292
+        },
+        {
+          "k": 23,
+          "size": 74,
+          "iou_oracle": 0.03374436090225564,
+          "consistency": 0.6082105987412112
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 8,
+          "size": 16,
+          "iou_oracle": 0.4700865265760198,
+          "consistency": 0.6342627070409155
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9774725191095901,
+          "MAE": 0.0029100822575856,
+          "S_a": 0.9488705033247271,
+          "E_p": 0.9947032782610826,
+          "n_frames": 44
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 3,
+          "size": 114,
+          "iou_oracle": 0.0,
+          "consistency": 0.8685180778832198
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.020129345103420994,
+          "S_a": 0.4823118418949077,
+          "E_p": 0.3046176393841678,
+          "n_frames": 44
+        }
+      },
+      "seconds": 18.6
+    },
+    {
+      "name": "flower_crab_spider_2",
+      "n_frames": 30,
+      "n_traj_total": 2293,
+      "n_traj_dynamic": 514,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.7756916674303652
+        },
+        {
+          "k": 1,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.9675496703623327
+        },
+        {
+          "k": 2,
+          "size": 19,
+          "iou_oracle": 0.24348481585181994,
+          "consistency": 0.583616921545937
+        },
+        {
+          "k": 3,
+          "size": 33,
+          "iou_oracle": 0.5796430931923331,
+          "consistency": 0.8841075552631652
+        },
+        {
+          "k": 4,
+          "size": 122,
+          "iou_oracle": 0.0,
+          "consistency": 0.9667355704556615
+        },
+        {
+          "k": 5,
+          "size": 20,
+          "iou_oracle": 0.06391012933069008,
+          "consistency": 0.6624971827495522
+        },
+        {
+          "k": 6,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.6928601869809713
+        },
+        {
+          "k": 7,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.5128692190148534
+        },
+        {
+          "k": 8,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.9284808922212542
+        },
+        {
+          "k": 9,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.543260888735944
+        },
+        {
+          "k": 10,
+          "size": 34,
+          "iou_oracle": 0.03762631692109224,
+          "consistency": 0.6544305547032649
+        },
+        {
+          "k": 11,
+          "size": 13,
+          "iou_oracle": 0.0,
+          "consistency": 0.5230370672672433
+        },
+        {
+          "k": 12,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.41221027240693786
+        },
+        {
+          "k": 13,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.6561629854221076
+        },
+        {
+          "k": 14,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.8798432252624953
+        },
+        {
+          "k": 15,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.42817551687949296
+        },
+        {
+          "k": 16,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.5442089201804695
+        },
+        {
+          "k": 17,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7113308151574076
+        },
+        {
+          "k": 18,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.5577462374910267
+        },
+        {
+          "k": 19,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.6858405858515266
+        },
+        {
+          "k": 20,
+          "size": 13,
+          "iou_oracle": 0.0019104021396503963,
+          "consistency": 0.5454201167454515
+        },
+        {
+          "k": 21,
+          "size": 30,
+          "iou_oracle": 0.0,
+          "consistency": 0.925759900240545
+        },
+        {
+          "k": 22,
+          "size": 18,
+          "iou_oracle": 0.4882200567410879,
+          "consistency": 0.7434354270456822
+        },
+        {
+          "k": 23,
+          "size": 52,
+          "iou_oracle": 0.0,
+          "consistency": 0.90591209932794
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 3,
+          "size": 33,
+          "iou_oracle": 0.5796430931923331,
+          "consistency": 0.8841075552631652
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9658486265820959,
+          "MAE": 0.003482928251226743,
+          "S_a": 0.9473517203091073,
+          "E_p": 0.9964790317139459,
+          "n_frames": 30
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.9675496703623327
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.049087999388575554,
+          "S_a": 0.4396450687909746,
+          "E_p": 0.948064914723058,
+          "n_frames": 30
+        }
+      },
+      "seconds": 12.4
+    },
+    {
+      "name": "hedgehog_3",
+      "n_frames": 25,
+      "n_traj_total": 2202,
+      "n_traj_dynamic": 440,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.9028286264051968
+        },
+        {
+          "k": 1,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.8561785584505883
+        },
+        {
+          "k": 2,
+          "size": 17,
+          "iou_oracle": 0.08426237145994875,
+          "consistency": 0.6980412744578971
+        },
+        {
+          "k": 3,
+          "size": 16,
+          "iou_oracle": 0.09241059241059241,
+          "consistency": 0.6142354266199765
+        },
+        {
+          "k": 4,
+          "size": 30,
+          "iou_oracle": 0.15301665301665301,
+          "consistency": 0.6632827517808222
+        },
+        {
+          "k": 5,
+          "size": 19,
+          "iou_oracle": 0.030203272820250576,
+          "consistency": 0.8281715168077589
+        },
+        {
+          "k": 6,
+          "size": 20,
+          "iou_oracle": 0.05160445317616241,
+          "consistency": 0.525432365568636
+        },
+        {
+          "k": 7,
+          "size": 9,
+          "iou_oracle": 0.025373975919599324,
+          "consistency": 0.7994753429630425
+        },
+        {
+          "k": 8,
+          "size": 13,
+          "iou_oracle": 0.11732186732186732,
+          "consistency": 0.8691234261806706
+        },
+        {
+          "k": 9,
+          "size": 21,
+          "iou_oracle": 0.075373034905409,
+          "consistency": 0.7786907787635908
+        },
+        {
+          "k": 10,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.6658351019886456
+        },
+        {
+          "k": 11,
+          "size": 14,
+          "iou_oracle": 0.07443900792981273,
+          "consistency": 0.6828315662884638
+        },
+        {
+          "k": 12,
+          "size": 13,
+          "iou_oracle": 0.07588033164149932,
+          "consistency": 0.7989366625756618
+        },
+        {
+          "k": 14,
+          "size": 16,
+          "iou_oracle": 0.09991809991809991,
+          "consistency": 0.7020256999341887
+        },
+        {
+          "k": 15,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.816497569214333
+        },
+        {
+          "k": 16,
+          "size": 13,
+          "iou_oracle": 0.07626121735623298,
+          "consistency": 0.6874073395359557
+        },
+        {
+          "k": 17,
+          "size": 15,
+          "iou_oracle": 0.13404023926046765,
+          "consistency": 0.5160584120435123
+        },
+        {
+          "k": 18,
+          "size": 7,
+          "iou_oracle": 0.04821867321867322,
+          "consistency": 0.7125815418387426
+        },
+        {
+          "k": 19,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": 0.9867300568425242
+        },
+        {
+          "k": 20,
+          "size": 11,
+          "iou_oracle": 0.07010057909174032,
+          "consistency": 0.6193994198821584
+        },
+        {
+          "k": 21,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.7986505064867545
+        },
+        {
+          "k": 22,
+          "size": 50,
+          "iou_oracle": 0.0,
+          "consistency": 0.919618515840222
+        },
+        {
+          "k": 23,
+          "size": 8,
+          "iou_oracle": 0.02384525052192067,
+          "consistency": 0.6181535302055324
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 4,
+          "size": 30,
+          "iou_oracle": 0.15301665301665301,
+          "consistency": 0.6632827517808222
+        },
+        "n_prompts_per_frame": [
+          7
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.6719205599839142,
+          "MAE": 0.02052812498062849,
+          "S_a": 0.7726710250410288,
+          "E_p": 0.8858343009396192,
+          "n_frames": 25
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 19,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": 0.9867300568425242
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.07651979129761458,
+          "S_a": 0.4495056033436729,
+          "E_p": 0.3577967022022367,
+          "n_frames": 25
+        }
+      },
+      "seconds": 5.1
+    },
+    {
+      "name": "ibex",
+      "n_frames": 25,
+      "n_traj_total": 1838,
+      "n_traj_dynamic": 1737,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1310,
+          "iou_oracle": 0.015978390257302445,
+          "consistency": 0.9962630485990289
+        },
+        {
+          "k": 1,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.5717126827435943
+        },
+        {
+          "k": 2,
+          "size": 53,
+          "iou_oracle": 0.0,
+          "consistency": 0.7734584779877398
+        },
+        {
+          "k": 3,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.7682062201366762
+        },
+        {
+          "k": 4,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.5392994748929614
+        },
+        {
+          "k": 5,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.5934605561159669
+        },
+        {
+          "k": 6,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.2587452064741713
+        },
+        {
+          "k": 7,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.8274929070610434
+        },
+        {
+          "k": 8,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.4481885465994462
+        },
+        {
+          "k": 9,
+          "size": 26,
+          "iou_oracle": 0.0,
+          "consistency": 0.6490199994190173
+        },
+        {
+          "k": 10,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.4076081556169091
+        },
+        {
+          "k": 11,
+          "size": 40,
+          "iou_oracle": 0.0,
+          "consistency": 0.5977289374731477
+        },
+        {
+          "k": 12,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.45345541816009083
+        },
+        {
+          "k": 13,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.4783901677529947
+        },
+        {
+          "k": 14,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.5902444524762736
+        },
+        {
+          "k": 15,
+          "size": 14,
+          "iou_oracle": 0.0,
+          "consistency": 0.36704847305384036
+        },
+        {
+          "k": 16,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.3641308516002244
+        },
+        {
+          "k": 17,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.3472207731496675
+        },
+        {
+          "k": 18,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.6103764800503563
+        },
+        {
+          "k": 20,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.7255993041312523
+        },
+        {
+          "k": 22,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.5528156835559608
+        },
+        {
+          "k": 23,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.5477776921413428
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1310,
+          "iou_oracle": 0.015978390257302445,
+          "consistency": 0.9962630485990289
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9655322155376405,
+          "MAE": 0.005309461778961122,
+          "S_a": 0.7495858542075134,
+          "E_p": 0.6585681811645508,
+          "n_frames": 25
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1310,
+          "iou_oracle": 0.015978390257302445,
+          "consistency": 0.9962630485990289
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9655322155376405,
+          "MAE": 0.005309461778961122,
+          "S_a": 0.7495858542075134,
+          "E_p": 0.6585681811645508,
+          "n_frames": 25
+        }
+      },
+      "seconds": 10.2
+    },
+    {
+      "name": "mongoose",
+      "n_frames": 10,
+      "n_traj_total": 2304,
+      "n_traj_dynamic": 1410,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 107,
+          "iou_oracle": 0.008079110651499483,
+          "consistency": 0.9020353025586761
+        },
+        {
+          "k": 1,
+          "size": 41,
+          "iou_oracle": 0.0,
+          "consistency": 0.9401908024448109
+        },
+        {
+          "k": 2,
+          "size": 41,
+          "iou_oracle": 0.051357608924436964,
+          "consistency": 0.7697328286322779
+        },
+        {
+          "k": 3,
+          "size": 40,
+          "iou_oracle": 0.0,
+          "consistency": 0.8563875692396329
+        },
+        {
+          "k": 4,
+          "size": 141,
+          "iou_oracle": 0.007761371626372438,
+          "consistency": 0.877214389265403
+        },
+        {
+          "k": 5,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.8693899585357905
+        },
+        {
+          "k": 7,
+          "size": 160,
+          "iou_oracle": 0.004178660971306528,
+          "consistency": 0.9068859846094024
+        },
+        {
+          "k": 8,
+          "size": 61,
+          "iou_oracle": 0.028681866562097362,
+          "consistency": 0.8340946321387617
+        },
+        {
+          "k": 9,
+          "size": 154,
+          "iou_oracle": 0.004389691305579156,
+          "consistency": 0.8982814114948272
+        },
+        {
+          "k": 10,
+          "size": 51,
+          "iou_oracle": 0.0173114389089897,
+          "consistency": 0.8513471655496182
+        },
+        {
+          "k": 11,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.7488160401942178
+        },
+        {
+          "k": 12,
+          "size": 38,
+          "iou_oracle": 0.12433166426207248,
+          "consistency": 0.7943936908925865
+        },
+        {
+          "k": 13,
+          "size": 159,
+          "iou_oracle": 0.004308862964406041,
+          "consistency": 0.9129253635661022
+        },
+        {
+          "k": 14,
+          "size": 145,
+          "iou_oracle": 0.004783011544336764,
+          "consistency": 0.8934106085575175
+        },
+        {
+          "k": 15,
+          "size": 48,
+          "iou_oracle": 0.0,
+          "consistency": 0.9519518619356624
+        },
+        {
+          "k": 16,
+          "size": 34,
+          "iou_oracle": 0.11057790483969777,
+          "consistency": 0.7954607950596938
+        },
+        {
+          "k": 17,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.7367356285093181
+        },
+        {
+          "k": 18,
+          "size": 18,
+          "iou_oracle": 0.1412249236083433,
+          "consistency": 0.7882847076118713
+        },
+        {
+          "k": 22,
+          "size": 89,
+          "iou_oracle": 0.013564133906391704,
+          "consistency": 0.8547731639866971
+        },
+        {
+          "k": 23,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.803006192382294
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 18,
+          "size": 18,
+          "iou_oracle": 0.1412249236083433,
+          "consistency": 0.7882847076118713
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.002122326017275642,
+          "MAE": 0.00918804258108139,
+          "S_a": 0.48092868104983977,
+          "E_p": 0.8698037566529594,
+          "n_frames": 10
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 15,
+          "size": 48,
+          "iou_oracle": 0.0,
+          "consistency": 0.9519518619356624
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.006981336791068315,
+          "S_a": 0.4864123366536556,
+          "E_p": 0.5880707410940273,
+          "n_frames": 10
+        }
+      },
+      "seconds": 4.2
+    },
+    {
+      "name": "moth",
+      "n_frames": 106,
+      "n_traj_total": 2297,
+      "n_traj_dynamic": 282,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 53,
+          "iou_oracle": 0.0,
+          "consistency": 0.8942373756523105
+        },
+        {
+          "k": 1,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.8518156311154962
+        },
+        {
+          "k": 2,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7337737647505886
+        },
+        {
+          "k": 3,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.6580875482305719
+        },
+        {
+          "k": 4,
+          "size": 37,
+          "iou_oracle": 0.0,
+          "consistency": 0.9680945120425158
+        },
+        {
+          "k": 5,
+          "size": 6,
+          "iou_oracle": 0.39852203747690684,
+          "consistency": 0.5213162833946821
+        },
+        {
+          "k": 6,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7906021687640642
+        },
+        {
+          "k": 7,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.6224211196358981
+        },
+        {
+          "k": 8,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.7992075271529236
+        },
+        {
+          "k": 9,
+          "size": 31,
+          "iou_oracle": 0.0,
+          "consistency": 0.8738957555798974
+        },
+        {
+          "k": 12,
+          "size": 6,
+          "iou_oracle": 0.5926299848561333,
+          "consistency": 0.7225164242652263
+        },
+        {
+          "k": 13,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.6988462779432467
+        },
+        {
+          "k": 14,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.5332715413758373
+        },
+        {
+          "k": 15,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7316027829035234
+        },
+        {
+          "k": 16,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.6431160827316393
+        },
+        {
+          "k": 18,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.6885918056670328
+        },
+        {
+          "k": 19,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.7248854292192869
+        },
+        {
+          "k": 21,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.8996314262666852
+        },
+        {
+          "k": 22,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.7539122902227989
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 12,
+          "size": 6,
+          "iou_oracle": 0.5926299848561333,
+          "consistency": 0.7225164242652263
+        },
+        "n_prompts_per_frame": [
+          3
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.8363411809616821,
+          "MAE": 0.00216112470249909,
+          "S_a": 0.8527721095454863,
+          "E_p": 0.9569137475814657,
+          "n_frames": 106
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 4,
+          "size": 37,
+          "iou_oracle": 0.0,
+          "consistency": 0.9680945120425158
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.01009341757217387,
+          "S_a": 0.4812324609931892,
+          "E_p": 0.8638980418955634,
+          "n_frames": 106
+        }
+      },
+      "seconds": 20.9
+    },
+    {
+      "name": "pygmy_seahorse_0",
+      "n_frames": 20,
+      "n_traj_total": 1836,
+      "n_traj_dynamic": 1799,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1332,
+          "iou_oracle": 0.02764478871482911,
+          "consistency": 0.9882864327471559
+        },
+        {
+          "k": 1,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.4219832382950274
+        },
+        {
+          "k": 2,
+          "size": 31,
+          "iou_oracle": 0.0,
+          "consistency": 0.8836830978070034
+        },
+        {
+          "k": 3,
+          "size": 31,
+          "iou_oracle": 0.0,
+          "consistency": 0.6509634530445071
+        },
+        {
+          "k": 4,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.2545207888626416
+        },
+        {
+          "k": 5,
+          "size": 23,
+          "iou_oracle": 0.0,
+          "consistency": 0.4962445793139172
+        },
+        {
+          "k": 6,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.401459075251287
+        },
+        {
+          "k": 7,
+          "size": 19,
+          "iou_oracle": 0.0,
+          "consistency": 0.0641850251947621
+        },
+        {
+          "k": 8,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.45408441596887084
+        },
+        {
+          "k": 9,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.7148574673715122
+        },
+        {
+          "k": 10,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": 0.6485710601649646
+        },
+        {
+          "k": 11,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.8029721086385173
+        },
+        {
+          "k": 12,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.39816370499226794
+        },
+        {
+          "k": 13,
+          "size": 13,
+          "iou_oracle": 0.0,
+          "consistency": 0.08698255739642469
+        },
+        {
+          "k": 14,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.5372087643795926
+        },
+        {
+          "k": 15,
+          "size": 13,
+          "iou_oracle": 0.0,
+          "consistency": 0.21253648576458883
+        },
+        {
+          "k": 16,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.4675819769787809
+        },
+        {
+          "k": 17,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.42738585430810994
+        },
+        {
+          "k": 18,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.22293460751931216
+        },
+        {
+          "k": 19,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.15953232673486017
+        },
+        {
+          "k": 20,
+          "size": 14,
+          "iou_oracle": 0.0,
+          "consistency": 0.24104789146010575
+        },
+        {
+          "k": 21,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.7147204167115413
+        },
+        {
+          "k": 22,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.5205177943925454
+        },
+        {
+          "k": 23,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.47027568381768636
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1332,
+          "iou_oracle": 0.02764478871482911,
+          "consistency": 0.9882864327471559
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.011898328969255089,
+          "S_a": 0.47663953463209296,
+          "E_p": 0.8194850067264119,
+          "n_frames": 20
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1332,
+          "iou_oracle": 0.02764478871482911,
+          "consistency": 0.9882864327471559
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.011898328969255089,
+          "S_a": 0.47663953463209296,
+          "E_p": 0.8194850067264119,
+          "n_frames": 20
+        }
+      },
+      "seconds": 8.2
+    },
+    {
+      "name": "rusty_spotted_cat_0",
+      "n_frames": 20,
+      "n_traj_total": 2303,
+      "n_traj_dynamic": 153,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.9815811717682411
+        },
+        {
+          "k": 1,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.9708862851907448
+        },
+        {
+          "k": 5,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.9636759096806635
+        },
+        {
+          "k": 7,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.9851376277403135
+        },
+        {
+          "k": 15,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.9892541803361197
+        },
+        {
+          "k": 17,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.9724674409741652
+        },
+        {
+          "k": 19,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.9657440678421867
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 28,
+          "iou_oracle": 0.0,
+          "consistency": 0.9815811717682411
+        },
+        "n_prompts_per_frame": [
+          7
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.011090603307820857,
+          "S_a": 0.48279413780199726,
+          "E_p": 0.6272056958339355,
+          "n_frames": 20
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 15,
+          "size": 33,
+          "iou_oracle": 0.0,
+          "consistency": 0.9892541803361197
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.024046495091170073,
+          "S_a": 0.4659888480572295,
+          "E_p": 0.8139379012315218,
+          "n_frames": 20
+        }
+      },
+      "seconds": 8.2
+    },
+    {
+      "name": "sand_cat_0",
+      "n_frames": 10,
+      "n_traj_total": 2166,
+      "n_traj_dynamic": 1972,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 72,
+          "iou_oracle": 0.11956887841023914,
+          "consistency": 0.9064451160542788
+        },
+        {
+          "k": 1,
+          "size": 750,
+          "iou_oracle": 0.0,
+          "consistency": 0.9837766440826687
+        },
+        {
+          "k": 2,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.7278215671064927
+        },
+        {
+          "k": 3,
+          "size": 38,
+          "iou_oracle": 0.0,
+          "consistency": 0.6206537590448756
+        },
+        {
+          "k": 4,
+          "size": 60,
+          "iou_oracle": 0.592959295929593,
+          "consistency": 0.8771432485758941
+        },
+        {
+          "k": 5,
+          "size": 70,
+          "iou_oracle": 0.0,
+          "consistency": 0.9115788107927797
+        },
+        {
+          "k": 6,
+          "size": 48,
+          "iou_oracle": 0.0,
+          "consistency": 0.8782878845047741
+        },
+        {
+          "k": 7,
+          "size": 95,
+          "iou_oracle": 0.0,
+          "consistency": 0.8279292638757466
+        },
+        {
+          "k": 8,
+          "size": 33,
+          "iou_oracle": 0.5356697903688857,
+          "consistency": 0.7844912938014506
+        },
+        {
+          "k": 9,
+          "size": 61,
+          "iou_oracle": 0.0,
+          "consistency": 0.8186451953887268
+        },
+        {
+          "k": 10,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.7390143893245255
+        },
+        {
+          "k": 11,
+          "size": 39,
+          "iou_oracle": 0.01209889531825355,
+          "consistency": 0.6212404811830297
+        },
+        {
+          "k": 12,
+          "size": 36,
+          "iou_oracle": 0.03194025107262037,
+          "consistency": 0.8493402416327582
+        },
+        {
+          "k": 13,
+          "size": 27,
+          "iou_oracle": 0.02942258183155572,
+          "consistency": 0.7496217409145792
+        },
+        {
+          "k": 14,
+          "size": 52,
+          "iou_oracle": 0.0,
+          "consistency": 0.7512629666356024
+        },
+        {
+          "k": 15,
+          "size": 36,
+          "iou_oracle": 0.0,
+          "consistency": 0.8986186791069264
+        },
+        {
+          "k": 16,
+          "size": 46,
+          "iou_oracle": 0.0,
+          "consistency": 0.8118123630668523
+        },
+        {
+          "k": 17,
+          "size": 21,
+          "iou_oracle": 0.013290316367313527,
+          "consistency": 0.7059891846214456
+        },
+        {
+          "k": 18,
+          "size": 26,
+          "iou_oracle": 0.0,
+          "consistency": 0.8261958278295537
+        },
+        {
+          "k": 19,
+          "size": 189,
+          "iou_oracle": 0.003088947651697751,
+          "consistency": 0.8818208623091477
+        },
+        {
+          "k": 20,
+          "size": 37,
+          "iou_oracle": 0.0,
+          "consistency": 0.7051974273351612
+        },
+        {
+          "k": 21,
+          "size": 82,
+          "iou_oracle": 0.0,
+          "consistency": 0.8992470080550546
+        },
+        {
+          "k": 22,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.7366000845162473
+        },
+        {
+          "k": 23,
+          "size": 83,
+          "iou_oracle": 0.19123837923171375,
+          "consistency": 0.9109302097411538
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 4,
+          "size": 60,
+          "iou_oracle": 0.592959295929593,
+          "consistency": 0.8771432485758941
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9740045317595847,
+          "MAE": 0.006375542469322681,
+          "S_a": 0.9235553480823201,
+          "E_p": 0.9876973717485413,
+          "n_frames": 10
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 750,
+          "iou_oracle": 0.0,
+          "consistency": 0.9837766440826687
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.04249924048781395,
+          "S_a": 0.45858812714706254,
+          "E_p": 0.7170657359815886,
+          "n_frames": 10
+        }
+      },
+      "seconds": 4.2
+    },
+    {
+      "name": "snow_leopard_10",
+      "n_frames": 155,
+      "n_traj_total": 2304,
+      "n_traj_dynamic": 312,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.7971540812678914
+        },
+        {
+          "k": 1,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.7854708877047419
+        },
+        {
+          "k": 2,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.709819257635363
+        },
+        {
+          "k": 3,
+          "size": 31,
+          "iou_oracle": 0.0,
+          "consistency": 0.8755166487300858
+        },
+        {
+          "k": 4,
+          "size": 13,
+          "iou_oracle": 0.0,
+          "consistency": 0.7842443795533514
+        },
+        {
+          "k": 5,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7732577367372895
+        },
+        {
+          "k": 6,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.6927996107297925
+        },
+        {
+          "k": 7,
+          "size": 36,
+          "iou_oracle": 0.0,
+          "consistency": 0.9466418596117011
+        },
+        {
+          "k": 8,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.7535129342521584
+        },
+        {
+          "k": 9,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": 0.6399296904879318
+        },
+        {
+          "k": 10,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.7131084980115061
+        },
+        {
+          "k": 11,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.7210529355959789
+        },
+        {
+          "k": 12,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.7893978591535116
+        },
+        {
+          "k": 13,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7707770328792798
+        },
+        {
+          "k": 14,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.7856418803548144
+        },
+        {
+          "k": 15,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.6639645851174156
+        },
+        {
+          "k": 16,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.8570436859818666
+        },
+        {
+          "k": 17,
+          "size": 56,
+          "iou_oracle": 0.0,
+          "consistency": 0.9070791980597762
+        },
+        {
+          "k": 18,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.6352061448927602
+        },
+        {
+          "k": 19,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.5719484866805917
+        },
+        {
+          "k": 20,
+          "size": 11,
+          "iou_oracle": 0.0,
+          "consistency": 0.820137578896497
+        },
+        {
+          "k": 21,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.7748993710125422
+        },
+        {
+          "k": 22,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.8336114028485327
+        },
+        {
+          "k": 23,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.6786765051834427
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 6,
+          "iou_oracle": 0.0,
+          "consistency": 0.7971540812678914
+        },
+        "n_prompts_per_frame": [
+          3
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.0017140176965885104,
+          "S_a": 0.49150502587344486,
+          "E_p": 0.85429703058154,
+          "n_frames": 155
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 7,
+          "size": 36,
+          "iou_oracle": 0.0,
+          "consistency": 0.9466418596117011
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.002783063112667972,
+          "S_a": 0.48832741388394063,
+          "E_p": 0.5935377838816086,
+          "n_frames": 155
+        }
+      },
+      "seconds": 64.0
+    },
+    {
+      "name": "stick_insect_1",
+      "n_frames": 39,
+      "n_traj_total": 2048,
+      "n_traj_dynamic": 2036,
+      "config": {
+        "feature": "raw_velocity",
+        "K": 24,
+        "n_prompt_points": 8,
+        "min_move_px": 2.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 503,
+          "iou_oracle": 0.022733771804403776,
+          "consistency": 0.9787799686059643
+        },
+        {
+          "k": 1,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.5920521365635179
+        },
+        {
+          "k": 2,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": 0.5867748307774383
+        },
+        {
+          "k": 3,
+          "size": 26,
+          "iou_oracle": 0.0,
+          "consistency": 0.31156537758057823
+        },
+        {
+          "k": 4,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.5491610085864409
+        },
+        {
+          "k": 5,
+          "size": 19,
+          "iou_oracle": 0.000324770225065766,
+          "consistency": -0.19536847734346718
+        },
+        {
+          "k": 6,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.2816800481700884
+        },
+        {
+          "k": 7,
+          "size": 267,
+          "iou_oracle": 0.0635700498834382,
+          "consistency": 0.9665537262899492
+        },
+        {
+          "k": 8,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.40320912359405225
+        },
+        {
+          "k": 9,
+          "size": 46,
+          "iou_oracle": 0.0,
+          "consistency": 0.6136261681738675
+        },
+        {
+          "k": 10,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.5284891214281183
+        },
+        {
+          "k": 11,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.4628787872732574
+        },
+        {
+          "k": 12,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.35923052451683146
+        },
+        {
+          "k": 13,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.4065912223300543
+        },
+        {
+          "k": 14,
+          "size": 325,
+          "iou_oracle": 0.021920717319490326,
+          "consistency": 0.9718277633857169
+        },
+        {
+          "k": 15,
+          "size": 22,
+          "iou_oracle": 0.0007793364506791361,
+          "consistency": 0.34818748827910084
+        },
+        {
+          "k": 16,
+          "size": 21,
+          "iou_oracle": 0.0,
+          "consistency": 0.3339121571360605
+        },
+        {
+          "k": 17,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.8488462459495016
+        },
+        {
+          "k": 18,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.39439946487275335
+        },
+        {
+          "k": 19,
+          "size": 532,
+          "iou_oracle": 0.11120563462319608,
+          "consistency": 0.9843847116616316
+        },
+        {
+          "k": 20,
+          "size": 15,
+          "iou_oracle": 0.0,
+          "consistency": 0.3990964708141218
+        },
+        {
+          "k": 21,
+          "size": 14,
+          "iou_oracle": 0.0,
+          "consistency": 0.36922943762496796
+        },
+        {
+          "k": 22,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.4710206620638264
+        },
+        {
+          "k": 23,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.2356277835146824
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 19,
+          "size": 532,
+          "iou_oracle": 0.11120563462319608,
+          "consistency": 0.9843847116616316
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.007071315062566581,
+          "MAE": 0.013862040371466905,
+          "S_a": 0.47529001680091154,
+          "E_p": 0.9510742623025339,
+          "n_frames": 39
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 19,
+          "size": 532,
+          "iou_oracle": 0.11120563462319608,
+          "consistency": 0.9843847116616316
+        },
+        "n_prompts_per_frame": [
+          8
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.007071315062566581,
+          "MAE": 0.013862040371466905,
+          "S_a": 0.47529001680091154,
+          "E_p": 0.9510742623025339,
+          "n_frames": 39
+        }
+      },
+      "seconds": 13.3
+    }
+  ]
+}

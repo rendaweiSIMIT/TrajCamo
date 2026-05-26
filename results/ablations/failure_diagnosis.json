@@ -1,0 +1,178 @@
+[
+  {
+    "name": "arctic_fox",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2297,
+    "inside_gt_f0": 281,
+    "on_target_visible": 263,
+    "n_dynamic": 2174,
+    "on_target_dynamic": 263,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.15
+  },
+  {
+    "name": "arctic_fox_3",
+    "n_traj_total": 2304,
+    "n_traj_visible": 838,
+    "inside_gt_f0": 79,
+    "on_target_visible": 0,
+    "n_dynamic": 678,
+    "on_target_dynamic": 0,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.0
+  },
+  {
+    "name": "black_cat_1",
+    "n_traj_total": 2304,
+    "n_traj_visible": 1859,
+    "inside_gt_f0": 140,
+    "on_target_visible": 90,
+    "n_dynamic": 1716,
+    "on_target_dynamic": 90,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.072
+  },
+  {
+    "name": "copperhead_snake",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2036,
+    "inside_gt_f0": 131,
+    "on_target_visible": 128,
+    "n_dynamic": 2002,
+    "on_target_dynamic": 128,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.288
+  },
+  {
+    "name": "flower_crab_spider_0",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2253,
+    "inside_gt_f0": 82,
+    "on_target_visible": 33,
+    "n_dynamic": 96,
+    "on_target_dynamic": 2,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.0
+  },
+  {
+    "name": "flower_crab_spider_1",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2277,
+    "inside_gt_f0": 91,
+    "on_target_visible": 66,
+    "n_dynamic": 1637,
+    "on_target_dynamic": 66,
+    "cluster_recoverable": "yes",
+    "best_cluster_purity": 1.0
+  },
+  {
+    "name": "flower_crab_spider_2",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2293,
+    "inside_gt_f0": 82,
+    "on_target_visible": 70,
+    "n_dynamic": 147,
+    "on_target_dynamic": 45,
+    "cluster_recoverable": "yes",
+    "best_cluster_purity": 1.0
+  },
+  {
+    "name": "hedgehog_3",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2202,
+    "inside_gt_f0": 357,
+    "on_target_visible": 270,
+    "n_dynamic": 159,
+    "on_target_dynamic": 106,
+    "cluster_recoverable": "yes",
+    "best_cluster_purity": 1.0
+  },
+  {
+    "name": "ibex",
+    "n_traj_total": 2304,
+    "n_traj_visible": 1838,
+    "inside_gt_f0": 30,
+    "on_target_visible": 15,
+    "n_dynamic": 1517,
+    "on_target_dynamic": 15,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.011
+  },
+  {
+    "name": "mongoose",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2304,
+    "inside_gt_f0": 56,
+    "on_target_visible": 60,
+    "n_dynamic": 25,
+    "on_target_dynamic": 0,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.0
+  },
+  {
+    "name": "moth",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2297,
+    "inside_gt_f0": 37,
+    "on_target_visible": 31,
+    "n_dynamic": 56,
+    "on_target_dynamic": 11,
+    "cluster_recoverable": "yes",
+    "best_cluster_purity": 1.0
+  },
+  {
+    "name": "pygmy_seahorse_0",
+    "n_traj_total": 2304,
+    "n_traj_visible": 1836,
+    "inside_gt_f0": 45,
+    "on_target_visible": 37,
+    "n_dynamic": 1647,
+    "on_target_dynamic": 37,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.028
+  },
+  {
+    "name": "rusty_spotted_cat_0",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2303,
+    "inside_gt_f0": 32,
+    "on_target_visible": 32,
+    "n_dynamic": 41,
+    "on_target_dynamic": 7,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.0
+  },
+  {
+    "name": "sand_cat_0",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2166,
+    "inside_gt_f0": 149,
+    "on_target_visible": 99,
+    "n_dynamic": 1748,
+    "on_target_dynamic": 99,
+    "cluster_recoverable": "yes",
+    "best_cluster_purity": 0.625
+  },
+  {
+    "name": "snow_leopard_10",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2304,
+    "inside_gt_f0": 32,
+    "on_target_visible": 32,
+    "n_dynamic": 68,
+    "on_target_dynamic": 0,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.0
+  },
+  {
+    "name": "stick_insect_1",
+    "n_traj_total": 2304,
+    "n_traj_visible": 2048,
+    "inside_gt_f0": 181,
+    "on_target_visible": 112,
+    "n_dynamic": 1944,
+    "on_target_dynamic": 112,
+    "cluster_recoverable": "no",
+    "best_cluster_purity": 0.091
+  }
+]

@@ -1,0 +1,1591 @@
+{
+  "config": {
+    "tag": "feat_raw_speed",
+    "feature": "raw_speed",
+    "K": 8,
+    "n_prompt_points": 12,
+    "min_move_px": 4.0,
+    "prompt_frames": "0",
+    "save_masks": false,
+    "dataset": "/root/autodl-tmp/VOSdataset",
+    "traj_cache": "/root/autodl-tmp/VOSdataset/_traj_cache",
+    "out": "/root/autodl-tmp/VOScode/ablations",
+    "ckpt": "/root/autodl-tmp/sam3_base_weights/sam3.pt"
+  },
+  "aggregates": {
+    "oracle": {
+      "F_w": 0.33280199543776484,
+      "MAE": 0.038190188289259824,
+      "S_a": 0.5803157479477186,
+      "E_p": 0.6978205080488542,
+      "n_videos": 16
+    },
+    "heuristic": {
+      "F_w": 0.21534355134947322,
+      "MAE": 0.04649028509825913,
+      "S_a": 0.49929750166146997,
+      "E_p": 0.5922476482835337,
+      "n_videos": 16
+    }
+  },
+  "rows": [
+    {
+      "name": "arctic_fox",
+      "n_frames": 30,
+      "n_traj_total": 2297,
+      "n_traj_dynamic": 2174,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 85,
+          "iou_oracle": 0.0,
+          "consistency": 0.14468796527523597
+        },
+        {
+          "k": 1,
+          "size": 1765,
+          "iou_oracle": 0.14764992419110293,
+          "consistency": 0.9508956583159365
+        },
+        {
+          "k": 2,
+          "size": 65,
+          "iou_oracle": 0.0,
+          "consistency": -0.36548289896727937
+        },
+        {
+          "k": 3,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": -1.1913679939695077
+        },
+        {
+          "k": 4,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": -0.7809694790556136
+        },
+        {
+          "k": 5,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": -3.529071449718085
+        },
+        {
+          "k": 6,
+          "size": 37,
+          "iou_oracle": 0.0,
+          "consistency": 0.5891475003464214
+        },
+        {
+          "k": 7,
+          "size": 141,
+          "iou_oracle": 0.0,
+          "consistency": 0.542212961559644
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 1765,
+          "iou_oracle": 0.14764992419110293,
+          "consistency": 0.9508956583159365
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0032433832505123837,
+          "MAE": 0.023927951324731113,
+          "S_a": 0.46822007684250144,
+          "E_p": 0.9094560524304208,
+          "n_frames": 30
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 1765,
+          "iou_oracle": 0.14764992419110293,
+          "consistency": 0.9508956583159365
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0032433832505123837,
+          "MAE": 0.023927951324731113,
+          "S_a": 0.46822007684250144,
+          "E_p": 0.9094560524304208,
+          "n_frames": 30
+        }
+      },
+      "seconds": 12.8
+    },
+    {
+      "name": "arctic_fox_3",
+      "n_frames": 35,
+      "n_traj_total": 838,
+      "n_traj_dynamic": 678,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 76,
+          "iou_oracle": 0.0,
+          "consistency": 0.7702805205063413
+        },
+        {
+          "k": 1,
+          "size": 204,
+          "iou_oracle": 0.023691978162630932,
+          "consistency": 0.9331937453936102
+        },
+        {
+          "k": 2,
+          "size": 84,
+          "iou_oracle": 0.0,
+          "consistency": 0.6222177839011315
+        },
+        {
+          "k": 3,
+          "size": 37,
+          "iou_oracle": 0.0,
+          "consistency": 0.216877317216161
+        },
+        {
+          "k": 4,
+          "size": 78,
+          "iou_oracle": 0.0,
+          "consistency": 0.5616546396710809
+        },
+        {
+          "k": 5,
+          "size": 84,
+          "iou_oracle": 0.0,
+          "consistency": 0.7330225944392506
+        },
+        {
+          "k": 6,
+          "size": 60,
+          "iou_oracle": 0.08515977172295872,
+          "consistency": 0.9357387393001
+        },
+        {
+          "k": 7,
+          "size": 55,
+          "iou_oracle": 0.0,
+          "consistency": 0.31610680380240297
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 6,
+          "size": 60,
+          "iou_oracle": 0.08515977172295872,
+          "consistency": 0.9357387393001
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.052968688415629524,
+          "S_a": 0.4473085765345198,
+          "E_p": 0.31785781749039393,
+          "n_frames": 35
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 6,
+          "size": 60,
+          "iou_oracle": 0.08515977172295872,
+          "consistency": 0.9357387393001
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.052968688415629524,
+          "S_a": 0.4473085765345198,
+          "E_p": 0.31785781749039393,
+          "n_frames": 35
+        }
+      },
+      "seconds": 14.5
+    },
+    {
+      "name": "black_cat_1",
+      "n_frames": 73,
+      "n_traj_total": 1859,
+      "n_traj_dynamic": 1716,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1270,
+          "iou_oracle": 0.07543081537210249,
+          "consistency": 0.922442627711834
+        },
+        {
+          "k": 1,
+          "size": 99,
+          "iou_oracle": 0.0,
+          "consistency": 0.5554520020423699
+        },
+        {
+          "k": 2,
+          "size": 120,
+          "iou_oracle": 0.0,
+          "consistency": -0.18836517386460705
+        },
+        {
+          "k": 3,
+          "size": 34,
+          "iou_oracle": 0.0,
+          "consistency": 0.5873802497755086
+        },
+        {
+          "k": 4,
+          "size": 60,
+          "iou_oracle": 0.0,
+          "consistency": 0.22227909189259865
+        },
+        {
+          "k": 5,
+          "size": 73,
+          "iou_oracle": 0.038338045718119516,
+          "consistency": -1.2760834364000275
+        },
+        {
+          "k": 6,
+          "size": 36,
+          "iou_oracle": 0.0,
+          "consistency": -0.2626486405273365
+        },
+        {
+          "k": 7,
+          "size": 24,
+          "iou_oracle": 0.0,
+          "consistency": -0.47196404944287207
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1270,
+          "iou_oracle": 0.07543081537210249,
+          "consistency": 0.922442627711834
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.6735834478609526,
+          "MAE": 0.007071144882053749,
+          "S_a": 0.7430804360749723,
+          "E_p": 0.8883179806534837,
+          "n_frames": 73
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1270,
+          "iou_oracle": 0.07543081537210249,
+          "consistency": 0.922442627711834
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.6735834478609526,
+          "MAE": 0.007071144882053749,
+          "S_a": 0.7430804360749723,
+          "E_p": 0.8883179806534837,
+          "n_frames": 73
+        }
+      },
+      "seconds": 30.2
+    },
+    {
+      "name": "copperhead_snake",
+      "n_frames": 83,
+      "n_traj_total": 2036,
+      "n_traj_dynamic": 2002,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 461,
+          "iou_oracle": 0.012899766605689774,
+          "consistency": 0.8234446378453828
+        },
+        {
+          "k": 1,
+          "size": 224,
+          "iou_oracle": 0.027980720219624958,
+          "consistency": 0.6765018967194125
+        },
+        {
+          "k": 2,
+          "size": 76,
+          "iou_oracle": 0.0,
+          "consistency": 0.2886043496736408
+        },
+        {
+          "k": 3,
+          "size": 468,
+          "iou_oracle": 0.05543491671807526,
+          "consistency": 0.8211868360018604
+        },
+        {
+          "k": 4,
+          "size": 86,
+          "iou_oracle": 0.0,
+          "consistency": 0.2855343499578059
+        },
+        {
+          "k": 5,
+          "size": 171,
+          "iou_oracle": 0.0,
+          "consistency": 0.4871811885197861
+        },
+        {
+          "k": 6,
+          "size": 77,
+          "iou_oracle": 0.0,
+          "consistency": 0.6090308102869619
+        },
+        {
+          "k": 7,
+          "size": 439,
+          "iou_oracle": 0.1319423856112264,
+          "consistency": 0.860500859729664
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 7,
+          "size": 439,
+          "iou_oracle": 0.1319423856112264,
+          "consistency": 0.860500859729664
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.957902887820935,
+          "MAE": 0.011299416434064687,
+          "S_a": 0.7802163301336638,
+          "E_p": 0.8283910951773477,
+          "n_frames": 83
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 7,
+          "size": 439,
+          "iou_oracle": 0.1319423856112264,
+          "consistency": 0.860500859729664
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.957902887820935,
+          "MAE": 0.011299416434064687,
+          "S_a": 0.7802163301336638,
+          "E_p": 0.8283910951773477,
+          "n_frames": 83
+        }
+      },
+      "seconds": 33.3
+    },
+    {
+      "name": "flower_crab_spider_0",
+      "n_frames": 40,
+      "n_traj_total": 2253,
+      "n_traj_dynamic": 96,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.916750901649886
+        },
+        {
+          "k": 1,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.7856942722325984
+        },
+        {
+          "k": 3,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.7188389351469817
+        },
+        {
+          "k": 4,
+          "size": 26,
+          "iou_oracle": 0.0,
+          "consistency": 0.7966015059253928
+        },
+        {
+          "k": 7,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.6852220623402892
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.916750901649886
+        },
+        "n_prompts_per_frame": [
+          5
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.00023486126030554142,
+          "MAE": 0.059399278555065396,
+          "S_a": 0.42935424348671686,
+          "E_p": 0.8102953387437164,
+          "n_frames": 40
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 22,
+          "iou_oracle": 0.0,
+          "consistency": 0.916750901649886
+        },
+        "n_prompts_per_frame": [
+          5
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.00023486126030554142,
+          "MAE": 0.059399278555065396,
+          "S_a": 0.42935424348671686,
+          "E_p": 0.8102953387437164,
+          "n_frames": 40
+        }
+      },
+      "seconds": 16.5
+    },
+    {
+      "name": "flower_crab_spider_1",
+      "n_frames": 44,
+      "n_traj_total": 2277,
+      "n_traj_dynamic": 1637,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 406,
+          "iou_oracle": 0.008364524575184072,
+          "consistency": 0.6071664171189577
+        },
+        {
+          "k": 1,
+          "size": 302,
+          "iou_oracle": 0.06684728807377689,
+          "consistency": 0.7010669621943086
+        },
+        {
+          "k": 2,
+          "size": 63,
+          "iou_oracle": 0.0,
+          "consistency": 0.40797214209014654
+        },
+        {
+          "k": 3,
+          "size": 242,
+          "iou_oracle": 0.05446708463949843,
+          "consistency": 0.4614422347467495
+        },
+        {
+          "k": 4,
+          "size": 209,
+          "iou_oracle": 0.03332296204107032,
+          "consistency": 0.7729073811441104
+        },
+        {
+          "k": 5,
+          "size": 16,
+          "iou_oracle": 0.4700865265760198,
+          "consistency": 0.5072709430635898
+        },
+        {
+          "k": 6,
+          "size": 139,
+          "iou_oracle": 0.0,
+          "consistency": 0.6892649392327137
+        },
+        {
+          "k": 7,
+          "size": 260,
+          "iou_oracle": 0.08706800763554517,
+          "consistency": 0.5657916082959729
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 5,
+          "size": 16,
+          "iou_oracle": 0.4700865265760198,
+          "consistency": 0.5072709430635898
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9774725191095901,
+          "MAE": 0.0029100822575856,
+          "S_a": 0.9488705033247271,
+          "E_p": 0.9947032782610826,
+          "n_frames": 44
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 4,
+          "size": 209,
+          "iou_oracle": 0.03332296204107032,
+          "consistency": 0.7729073811441104
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.02777356074445627,
+          "S_a": 0.4679308024015837,
+          "E_p": 0.7525062101091534,
+          "n_frames": 44
+        }
+      },
+      "seconds": 18.2
+    },
+    {
+      "name": "flower_crab_spider_2",
+      "n_frames": 30,
+      "n_traj_total": 2293,
+      "n_traj_dynamic": 147,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 75,
+          "iou_oracle": 0.0,
+          "consistency": 0.9515480747129529
+        },
+        {
+          "k": 1,
+          "size": 11,
+          "iou_oracle": 0.24822015334063527,
+          "consistency": 0.8640595042866418
+        },
+        {
+          "k": 2,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.9190557559257311
+        },
+        {
+          "k": 3,
+          "size": 17,
+          "iou_oracle": 0.0,
+          "consistency": 0.9440528595609367
+        },
+        {
+          "k": 4,
+          "size": 6,
+          "iou_oracle": 0.2722199537226079,
+          "consistency": 0.8371593400516797
+        },
+        {
+          "k": 5,
+          "size": 6,
+          "iou_oracle": 0.21803573902202522,
+          "consistency": 0.8735335095669563
+        },
+        {
+          "k": 6,
+          "size": 11,
+          "iou_oracle": 0.3116613639507539,
+          "consistency": 0.9000597165461903
+        },
+        {
+          "k": 7,
+          "size": 13,
+          "iou_oracle": 0.37541721085473806,
+          "consistency": 0.9049055789309544
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 7,
+          "size": 13,
+          "iou_oracle": 0.37541721085473806,
+          "consistency": 0.9049055789309544
+        },
+        "n_prompts_per_frame": [
+          3
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9667829569727834,
+          "MAE": 0.0034526909623915952,
+          "S_a": 0.9479488396743913,
+          "E_p": 0.9964048319925232,
+          "n_frames": 30
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 75,
+          "iou_oracle": 0.0,
+          "consistency": 0.9515480747129529
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.024981409249206384,
+          "S_a": 0.4737000369550698,
+          "E_p": 0.36844601826078915,
+          "n_frames": 30
+        }
+      },
+      "seconds": 11.9
+    },
+    {
+      "name": "hedgehog_3",
+      "n_frames": 25,
+      "n_traj_total": 2202,
+      "n_traj_dynamic": 159,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 17,
+          "iou_oracle": 0.13326513213981245,
+          "consistency": 0.6471715561376994
+        },
+        {
+          "k": 1,
+          "size": 45,
+          "iou_oracle": 0.19277228050435186,
+          "consistency": 0.745566726733754
+        },
+        {
+          "k": 2,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.8730396006929615
+        },
+        {
+          "k": 3,
+          "size": 14,
+          "iou_oracle": 0.11820911820911821,
+          "consistency": 0.8619427956658706
+        },
+        {
+          "k": 4,
+          "size": 22,
+          "iou_oracle": 0.09057564642759708,
+          "consistency": 0.7139766827371768
+        },
+        {
+          "k": 5,
+          "size": 17,
+          "iou_oracle": 0.07633612467263733,
+          "consistency": 0.7679572526499071
+        },
+        {
+          "k": 6,
+          "size": 13,
+          "iou_oracle": 0.10039585039585039,
+          "consistency": 0.7766903103959465
+        },
+        {
+          "k": 7,
+          "size": 11,
+          "iou_oracle": 0.09271587383660806,
+          "consistency": 0.3718745837882558
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 45,
+          "iou_oracle": 0.19277228050435186,
+          "consistency": 0.745566726733754
+        },
+        "n_prompts_per_frame": [
+          11
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.7299432442218066,
+          "MAE": 0.021606944557279347,
+          "S_a": 0.7908938418494493,
+          "E_p": 0.9285583922481544,
+          "n_frames": 25
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 2,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.8730396006929615
+        },
+        "n_prompts_per_frame": [
+          5
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.0748354160413146,
+          "S_a": 0.4546606843672115,
+          "E_p": 0.2923491219644499,
+          "n_frames": 25
+        }
+      },
+      "seconds": 5.2
+    },
+    {
+      "name": "ibex",
+      "n_frames": 25,
+      "n_traj_total": 1838,
+      "n_traj_dynamic": 1517,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1313,
+          "iou_oracle": 0.01591800565568109,
+          "consistency": 0.9742419993599061
+        },
+        {
+          "k": 1,
+          "size": 65,
+          "iou_oracle": 0.0,
+          "consistency": 0.5945032440717124
+        },
+        {
+          "k": 2,
+          "size": 12,
+          "iou_oracle": 0.0,
+          "consistency": -0.8046099048511077
+        },
+        {
+          "k": 3,
+          "size": 18,
+          "iou_oracle": 0.30372776051962724,
+          "consistency": -0.759968441894691
+        },
+        {
+          "k": 4,
+          "size": 40,
+          "iou_oracle": 0.1957879707299661,
+          "consistency": 0.32393127825529955
+        },
+        {
+          "k": 5,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": 0.13763511229470793
+        },
+        {
+          "k": 6,
+          "size": 17,
+          "iou_oracle": 0.07816576359622718,
+          "consistency": -0.8125365609358439
+        },
+        {
+          "k": 7,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": -0.5197066833130788
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 3,
+          "size": 18,
+          "iou_oracle": 0.30372776051962724,
+          "consistency": -0.759968441894691
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.005375086823478341,
+          "S_a": 0.4839039824721389,
+          "E_p": 0.6267481029752698,
+          "n_frames": 25
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1313,
+          "iou_oracle": 0.01591800565568109,
+          "consistency": 0.9742419993599061
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.8655287997099174,
+          "MAE": 0.030559114813804626,
+          "S_a": 0.49639067512771645,
+          "E_p": 0.29252169343802426,
+          "n_frames": 25
+        }
+      },
+      "seconds": 10.1
+    },
+    {
+      "name": "mongoose",
+      "n_frames": 10,
+      "n_traj_total": 2304,
+      "n_traj_dynamic": 25,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 1,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.9633047144312993
+        },
+        {
+          "k": 4,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.9621670929289267
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.9633047144312993
+        },
+        "n_prompts_per_frame": [
+          3
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.007627278752624989,
+          "S_a": 0.4840010843113685,
+          "E_p": 0.6932674207725662,
+          "n_frames": 10
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 5,
+          "iou_oracle": 0.0,
+          "consistency": 0.9633047144312993
+        },
+        "n_prompts_per_frame": [
+          3
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.007627278752624989,
+          "S_a": 0.4840010843113685,
+          "E_p": 0.6932674207725662,
+          "n_frames": 10
+        }
+      },
+      "seconds": 4.0
+    },
+    {
+      "name": "moth",
+      "n_frames": 106,
+      "n_traj_total": 2297,
+      "n_traj_dynamic": 56,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 1,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.9333166622332084
+        },
+        {
+          "k": 3,
+          "size": 10,
+          "iou_oracle": 0.0,
+          "consistency": 0.888927897587961
+        },
+        {
+          "k": 7,
+          "size": 8,
+          "iou_oracle": 0.0,
+          "consistency": 0.9207966156743368
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.9333166622332084
+        },
+        "n_prompts_per_frame": [
+          6
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.008605336230072492,
+          "S_a": 0.48486373667588634,
+          "E_p": 0.6612944885511995,
+          "n_frames": 106
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 27,
+          "iou_oracle": 0.0,
+          "consistency": 0.9333166622332084
+        },
+        "n_prompts_per_frame": [
+          6
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.008605336230072492,
+          "S_a": 0.48486373667588634,
+          "E_p": 0.6612944885511995,
+          "n_frames": 106
+        }
+      },
+      "seconds": 21.0
+    },
+    {
+      "name": "pygmy_seahorse_0",
+      "n_frames": 20,
+      "n_traj_total": 1836,
+      "n_traj_dynamic": 1647,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1333,
+          "iou_oracle": 0.027553916592429922,
+          "consistency": 0.9698762097575109
+        },
+        {
+          "k": 1,
+          "size": 42,
+          "iou_oracle": 0.0,
+          "consistency": -0.5405613126181075
+        },
+        {
+          "k": 2,
+          "size": 58,
+          "iou_oracle": 0.0,
+          "consistency": -0.13197171501877736
+        },
+        {
+          "k": 3,
+          "size": 42,
+          "iou_oracle": 0.0,
+          "consistency": -0.9358830344943032
+        },
+        {
+          "k": 4,
+          "size": 51,
+          "iou_oracle": 0.0,
+          "consistency": 0.01368247931728861
+        },
+        {
+          "k": 5,
+          "size": 60,
+          "iou_oracle": 0.0,
+          "consistency": -0.3644065697582788
+        },
+        {
+          "k": 6,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": -0.7347185723864122
+        },
+        {
+          "k": 7,
+          "size": 29,
+          "iou_oracle": 0.0,
+          "consistency": -0.7370657420264477
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1333,
+          "iou_oracle": 0.027553916592429922,
+          "consistency": 0.9698762097575109
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9387083625444443,
+          "MAE": 0.34209114462137225,
+          "S_a": 0.34520335789745454,
+          "E_p": 0.25828923852607166,
+          "n_frames": 20
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1333,
+          "iou_oracle": 0.027553916592429922,
+          "consistency": 0.9698762097575109
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.9387083625444443,
+          "MAE": 0.34209114462137225,
+          "S_a": 0.34520335789745454,
+          "E_p": 0.25828923852607166,
+          "n_frames": 20
+        }
+      },
+      "seconds": 8.0
+    },
+    {
+      "name": "rusty_spotted_cat_0",
+      "n_frames": 20,
+      "n_traj_total": 2303,
+      "n_traj_dynamic": 41,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.9823779052780144
+        },
+        {
+          "k": 6,
+          "size": 13,
+          "iou_oracle": 0.0,
+          "consistency": 0.9786771925686335
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.9823779052780144
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.008685980853624643,
+          "S_a": 0.4920372974629692,
+          "E_p": 0.27876610499615917,
+          "n_frames": 20
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 18,
+          "iou_oracle": 0.0,
+          "consistency": 0.9823779052780144
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.008685980853624643,
+          "S_a": 0.4920372974629692,
+          "E_p": 0.27876610499615917,
+          "n_frames": 20
+        }
+      },
+      "seconds": 8.1
+    },
+    {
+      "name": "sand_cat_0",
+      "n_frames": 10,
+      "n_traj_total": 2166,
+      "n_traj_dynamic": 1748,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 129,
+          "iou_oracle": 0.021413599712974678,
+          "consistency": 0.574275693406878
+        },
+        {
+          "k": 1,
+          "size": 770,
+          "iou_oracle": 0.041710306023377955,
+          "consistency": 0.9299810893558969
+        },
+        {
+          "k": 2,
+          "size": 260,
+          "iou_oracle": 0.03426517123223548,
+          "consistency": 0.7364395059488074
+        },
+        {
+          "k": 3,
+          "size": 101,
+          "iou_oracle": 0.0,
+          "consistency": 0.6233220456621044
+        },
+        {
+          "k": 4,
+          "size": 57,
+          "iou_oracle": 0.02794385786371539,
+          "consistency": 0.5597198480450811
+        },
+        {
+          "k": 5,
+          "size": 173,
+          "iou_oracle": 0.14051007254252712,
+          "consistency": 0.7454447898142627
+        },
+        {
+          "k": 6,
+          "size": 155,
+          "iou_oracle": 0.0,
+          "consistency": 0.5919991731289396
+        },
+        {
+          "k": 7,
+          "size": 103,
+          "iou_oracle": 0.2959654682003044,
+          "consistency": 0.5755921900858412
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 7,
+          "size": 103,
+          "iou_oracle": 0.2959654682003044,
+          "consistency": 0.5755921900858412
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0706651848184027,
+          "MAE": 0.03798101171851158,
+          "S_a": 0.472970727816751,
+          "E_p": 0.6370596317651643,
+          "n_frames": 10
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 1,
+          "size": 770,
+          "iou_oracle": 0.041710306023377955,
+          "consistency": 0.9299810893558969
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.045977864414453506,
+          "S_a": 0.4556137557058982,
+          "E_p": 0.78848543722465,
+          "n_frames": 10
+        }
+      },
+      "seconds": 4.0
+    },
+    {
+      "name": "snow_leopard_10",
+      "n_frames": 155,
+      "n_traj_total": 2304,
+      "n_traj_dynamic": 68,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.5860562158389429
+        },
+        {
+          "k": 2,
+          "size": 20,
+          "iou_oracle": 0.0,
+          "consistency": 0.5274256106841988
+        },
+        {
+          "k": 3,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.42451457879023424
+        },
+        {
+          "k": 6,
+          "size": 7,
+          "iou_oracle": 0.0,
+          "consistency": 0.4923584159166756
+        },
+        {
+          "k": 7,
+          "size": 9,
+          "iou_oracle": 0.0,
+          "consistency": 0.5223802415461152
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.5860562158389429
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.0028677825395378373,
+          "S_a": 0.48810721262449563,
+          "E_p": 0.5816682216012663,
+          "n_frames": 155
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 16,
+          "iou_oracle": 0.0,
+          "consistency": 0.5860562158389429
+        },
+        "n_prompts_per_frame": [
+          4
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0,
+          "MAE": 0.0028677825395378373,
+          "S_a": 0.48810721262449563,
+          "E_p": 0.5816682216012663,
+          "n_frames": 155
+        }
+      },
+      "seconds": 62.9
+    },
+    {
+      "name": "stick_insect_1",
+      "n_frames": 39,
+      "n_traj_total": 2048,
+      "n_traj_dynamic": 1944,
+      "config": {
+        "feature": "raw_speed",
+        "K": 8,
+        "n_prompt_points": 12,
+        "min_move_px": 4.0,
+        "prompt_frames_spec": "0"
+      },
+      "cluster_info": [
+        {
+          "k": 0,
+          "size": 1035,
+          "iou_oracle": 0.07483238782877773,
+          "consistency": 0.9570491658010997
+        },
+        {
+          "k": 1,
+          "size": 76,
+          "iou_oracle": 0.0,
+          "consistency": 0.14139833963509407
+        },
+        {
+          "k": 2,
+          "size": 610,
+          "iou_oracle": 0.02804985996836591,
+          "consistency": 0.9082717756307225
+        },
+        {
+          "k": 3,
+          "size": 64,
+          "iou_oracle": 0.0,
+          "consistency": -0.09739853381813157
+        },
+        {
+          "k": 4,
+          "size": 50,
+          "iou_oracle": 0.0,
+          "consistency": -0.5731089213341771
+        },
+        {
+          "k": 5,
+          "size": 38,
+          "iou_oracle": 0.0006206086397588492,
+          "consistency": -0.7190140875315916
+        },
+        {
+          "k": 6,
+          "size": 39,
+          "iou_oracle": 0.0,
+          "consistency": -0.2301963750169902
+        },
+        {
+          "k": 7,
+          "size": 32,
+          "iou_oracle": 0.0,
+          "consistency": -0.14650566592744063
+        }
+      ],
+      "oracle": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1035,
+          "iou_oracle": 0.07483238782877773,
+          "consistency": 0.9570491658010997
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0062950791445045015,
+          "MAE": 0.01517319370013399,
+          "S_a": 0.47807171998149145,
+          "E_p": 0.754050132596848,
+          "n_frames": 39
+        }
+      },
+      "heuristic": {
+        "selected_cluster": {
+          "k": 0,
+          "size": 1035,
+          "iou_oracle": 0.07483238782877773,
+          "consistency": 0.9570491658010997
+        },
+        "n_prompts_per_frame": [
+          12
+        ],
+        "prompt_frame_idxs": [
+          0
+        ],
+        "metrics": {
+          "F_w": 0.0062950791445045015,
+          "MAE": 0.01517319370013399,
+          "S_a": 0.47807171998149145,
+          "E_p": 0.754050132596848,
+          "n_frames": 39
+        }
+      },
+      "seconds": 13.3
+    }
+  ]
+}
