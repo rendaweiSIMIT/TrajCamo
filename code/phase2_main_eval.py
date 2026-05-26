@@ -211,10 +211,24 @@ def evaluate_video(predictor, video_dir: Path, traj_cache: Path,
 
     # Drop trajectories rarely visible
     keep = vis_p.mean(axis=0) >= 0.2
-    tracks_k = tracks_p[:, keep]                 # (T, Nk, 2)
-    vis_k = vis_p[:, keep]
+    tracks_v = tracks_p[:, keep]                 # (T, Nv, 2)
+    vis_v = vis_p[:, keep]
 
-    # Features + cluster
+    # Filter dynamic trajectories: total spatial range > MIN_MOVE_PX.
+    # Static background trajectories carry no motion information, and after L2
+    # normalization their feature vectors collapse to random unit directions,
+    # which causes K-means to merge them all into one huge cluster.
+    MIN_MOVE_PX = 4.0   # in padded pixel coords (image is 384x512)
+    pos_range = tracks_v.max(axis=0) - tracks_v.min(axis=0)   # (Nv, 2)
+    movement = np.linalg.norm(pos_range, axis=1)              # (Nv,)
+    dynamic = movement > MIN_MOVE_PX
+    if dynamic.sum() < K * 5:
+        # too few dynamic — fall back to all visible
+        dynamic = np.ones_like(dynamic, dtype=bool)
+    tracks_k = tracks_v[:, dynamic]
+    vis_k = vis_v[:, dynamic]
+
+    # Features + cluster (only on dynamic subset)
     F = feat_raw_velocity(tracks_k)
     km = KMeans(n_clusters=K, n_init=10, random_state=0).fit(F)
     labels = km.labels_
@@ -266,9 +280,22 @@ def evaluate_video(predictor, video_dir: Path, traj_cache: Path,
             results[label_name] = {"error": "no visible cluster points"}
             continue
 
-        # FPS subsample
-        idxs = fps_sample(f0_pts_padded, n_prompt_points)
-        prompt_pts_padded = f0_pts_padded[idxs]  # (P, 2)
+        # Use cluster CENTROID + a tight neighborhood of its closest points.
+        # This avoids feeding SAM3 a set of points scattered across the
+        # whole frame (which happens when a cluster degenerates into a
+        # large mega-cluster).
+        centroid = f0_pts_padded.mean(axis=0)
+        dists = np.linalg.norm(f0_pts_padded - centroid, axis=1)
+        order = np.argsort(dists)
+        # Median radius gives a robust local-cluster bound; cap at min of {n_prompt_points, half} points
+        n_take = min(n_prompt_points, max(3, len(f0_pts_padded) // 4))
+        prompt_pts_padded = f0_pts_padded[order[:n_take]]
+        # Discard any prompt that's > 2× median dist away (outlier guard)
+        med_d = np.median(dists)
+        kept_mask = np.linalg.norm(prompt_pts_padded - centroid, axis=1) <= max(med_d * 2, 30.0)
+        prompt_pts_padded = prompt_pts_padded[kept_mask]
+        if len(prompt_pts_padded) == 0:
+            prompt_pts_padded = centroid[None, :]
 
         # Map PADDED -> ORIGINAL coords -> [0,1] relative
         # Padded coords are in (new_h, new_w) area within (target_h, target_w); padding is bottom/right.
