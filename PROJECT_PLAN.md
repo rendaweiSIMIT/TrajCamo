@@ -57,7 +57,9 @@ The four stages of the model are fixed (see `paper/TrajCamo_draft.tex`):
 
 ---
 
-## 3. What is already done (as of 2026-05-26)
+## 3. What is already done (as of 2026-05-26 evening)
+
+### Trajectory pipeline (pre-agent)
 
 * **Phase 1 — Trajectory cache**: CoTracker3 trajectories pre-computed and
   saved for all 87 MoCA-Mask videos (`_traj_cache/`, ~69 MB).
@@ -79,6 +81,45 @@ The four stages of the model are fixed (see `paper/TrajCamo_draft.tex`):
 * **Kinematic Signature Encoder (v1)** trained but **failed** (contrastive
   loss flat, F_w 0.281 vs raw velocity 0.507). v2 with cross-video
   negatives + hard-neg mining is in Stage B.
+
+### Stage A — agent foundation (code skeleton DONE, training NOT YET)
+
+* **Pre-downloaded model weights** (rsync-ready under `/root/autodl-tmp/models/`):
+    * `InternVL3-8B/`   ~16 GB
+    * `InternVL3-2B/`   ~4 GB    (4090 debug)
+    * `Qwen2.5-VL-7B-Instruct/`  ~16 GB    (backup)
+    * `dinov2-large/`   ~2.4 GB
+* **Agent module (`code/agent/`)** — 4 files, end-to-end pipeline works:
+    * `actions.py` — 4-action vocabulary (`SELECT(k)` / `ADD_POS(f,x,y)` /
+      `ADD_NEG(f,x,y)` / `TERMINATE`), tolerant regex parser, system prompt.
+    * `state_builder.py` — cluster overview rendering, thumbnail strip,
+      current-mask overlay strip.
+    * `agent.py` — `InternVL3Agent` wrapper + `PromptStream` accumulator +
+      `run_agent_on_video()` main loop.
+    * `infer.py` — CLI entry point with per-video 4-COD-metric eval.
+* **First smoke test** (arctic_fox, InternVL3-2B, K_max=5, **no training**):
+    * 5 actions emitted, all parse cleanly:
+      `SELECT(0) → ADD_NEG → SELECT(1) → SELECT(1) → SELECT(2)`
+    * 30/30 frames get non-empty masks; MLLM↔SAM3 round-trip stable.
+    * Metrics: F_w=0.000, MAE=0.032, S_α=0.461, E_φ=0.734 (18s).
+    * **Quality is bad on purpose** — the 2B model zero-shot can't pick
+      the right cluster. Plumbing is the goal here; Stage B fixes quality.
+* **Per-step wall-clock**: InternVL3-2B forward 0.2-0.5 s, SAM 3 full-video
+  re-propagation 2.7-2.8 s (dominant), so 5 steps ≈ 15-20 s per video.
+* **Env reproducibility** (`code/setup_env_on_new_machine.sh`):
+  auto-detects GPU sm version (sm_120 Blackwell → cu128 wheel; sm_8x → cu126),
+  creates fresh `sam3` env, installs pinned `requirements_sam3_env.txt`,
+  installs SAM 3 editable, optional flash-attn.
+
+### Environment caveats (codified, will be folded into setup script)
+
+* **transformers 5.9 is incompatible with InternVL3's custom modeling
+  code** — pinned to **4.49.0**.
+* **`accelerate ≥ 0.26.0`** required for `low_cpu_mem_usage=True`.
+* **transformers dynamic-module cache occasionally fails to copy
+  `configuration_intern_vit.py`** to the per-hash cache subdir. Workaround
+  is a manual `cp` from the model directory; will codify in the setup
+  script before A100 migration.
 
 ---
 
