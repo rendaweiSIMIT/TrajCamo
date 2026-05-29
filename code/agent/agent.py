@@ -245,6 +245,7 @@ def run_agent_on_video(
     n_thumbnails: int = 4,
     n_prompt_points: int = 12,
     verbose: bool = True,
+    forbid_actions: Optional[set] = None,
 ) -> dict:
     name = video_dir.name
     imgs_dir = video_dir / "Imgs"
@@ -316,6 +317,13 @@ def run_agent_on_video(
             if verbose:
                 print(f"  [step {step}] parse fail, defaulting to TERMINATE: {e}", flush=True)
             action = Action(type="TERMINATE", raw=response)
+
+        # Ablation: force-rewrite forbidden actions to TERMINATE
+        if forbid_actions and action.type in forbid_actions:
+            if verbose:
+                print(f"  [step {step}] {action.type} forbidden by ablation, "
+                      f"forcing TERMINATE", flush=True)
+            action = Action(type="TERMINATE", raw=f"[forbidden:{action.type}]")
 
         history.append(action)
 
