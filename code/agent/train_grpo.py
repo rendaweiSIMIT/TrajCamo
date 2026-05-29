@@ -238,6 +238,7 @@ def rollout_one(
     K: int = 8, K_max: int = 5, n_thumbnails: int = 4, n_prompt_points: int = 12,
     temperature: float = 0.7, top_p: float = 0.9,
     step_penalty: float = 0.01,
+    sam3_state=None,
 ) -> dict:
     name = video_dir.name
     imgs_dir = video_dir / "Imgs"
@@ -313,7 +314,8 @@ def rollout_one(
             continue
         try:
             with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
-                current_masks = run_sam3_session(sam3, imgs_dir, stream, T)
+                current_masks = run_sam3_session(sam3, imgs_dir, stream, T,
+                                                  state=sam3_state)
         except Exception as e:
             print(f"  [{name} step {step}] SAM3 error: {e}", flush=True)
             continue
@@ -623,18 +625,47 @@ def main():
             t_v0 = time.time()
             rollouts = []
             model.eval()
-            for g in range(args.rollouts_per_video):
-                try:
-                    ro = rollout_one(
-                        smpl, sam3, vd, cache, gt_dir,
-                        K_max=args.K_max,
-                        temperature=args.temperature, top_p=args.top_p,
-                        step_penalty=args.reward_lambda,
-                    )
-                except Exception as e:
-                    print(f"  [{vd.name} g={g}] rollout error: {e}", flush=True)
-                    continue
-                rollouts.append(ro)
+            # Hoist SAM3 init_state out of the rollouts loop — preload all
+            # frames once per video, reuse the same state across G rollouts
+            # via clear_all_points_in_video. Skips G-1 redundant JPEG-decode
+            # + HtoD copy passes per video (10-20 s × (G-1) on long videos).
+            # Mask outputs are bit-exact equivalent (see agent.py docstring).
+            imgs_dir_v = vd / "Imgs"
+            sam3_state = None
+            try:
+                sam3_state = sam3.init_state(video_path=str(imgs_dir_v))
+                for g in range(args.rollouts_per_video):
+                    try:
+                        ro = rollout_one(
+                            smpl, sam3, vd, cache, gt_dir,
+                            K_max=args.K_max,
+                            temperature=args.temperature, top_p=args.top_p,
+                            step_penalty=args.reward_lambda,
+                            sam3_state=sam3_state,
+                        )
+                    except Exception as e:
+                        print(f"  [{vd.name} g={g}] rollout error: {e}", flush=True)
+                        continue
+                    rollouts.append(ro)
+            except Exception as e:
+                print(f"  [{vd.name}] init_state error, falling back to fresh "
+                      f"per-rollout: {e}", flush=True)
+                # Fall back to the old fresh-state-per-rollout path
+                for g in range(args.rollouts_per_video):
+                    try:
+                        ro = rollout_one(
+                            smpl, sam3, vd, cache, gt_dir,
+                            K_max=args.K_max,
+                            temperature=args.temperature, top_p=args.top_p,
+                            step_penalty=args.reward_lambda,
+                        )
+                    except Exception as e2:
+                        print(f"  [{vd.name} g={g}] rollout error: {e2}", flush=True)
+                        continue
+                    rollouts.append(ro)
+            finally:
+                if sam3_state is not None:
+                    del sam3_state
             if len(rollouts) < 2:
                 print(f"  [{vd.name}] only {len(rollouts)} rollouts, skip", flush=True)
                 continue

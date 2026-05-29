@@ -95,10 +95,39 @@ class PromptStream:
 
 def run_sam3_session(
     predictor, imgs_dir: Path, stream: PromptStream, T: int,
+    state=None,
 ) -> Dict[int, np.ndarray]:
-    """Init a fresh SAM 3 session, push all accumulated prompts, propagate.
-    Returns per_frame_masks (binary, original-resolution)."""
-    state = predictor.init_state(video_path=str(imgs_dir))
+    """Init a SAM 3 session (or reuse a caller-provided one), push all
+    accumulated prompts, propagate. Returns per_frame_masks (binary,
+    original-resolution).
+
+    state semantics:
+      - state=None (default): predictor.init_state(video_path=imgs_dir) —
+        does the full JPEG-decode + HtoD copy. Costly: ~10-20 s + ~2.4 GB
+        for a 200-frame 1008-px video.
+      - state=<caller-owned>: skip the reload, call
+        predictor.clear_all_points_in_video(state) to wipe prompts +
+        tracking results from a prior rollout, and reuse the same
+        preloaded `images` tensor. `clear_all_points_in_video` is what
+        `init_state` itself invokes as its terminal reset step (see
+        sam3_tracking_predictor.py), so the post-reset state is
+        bit-identical to a freshly initialized one modulo the
+        `cached_features` per-frame dict (which is overwritten on next
+        access anyway). The reused-state mask outputs match the
+        fresh-state outputs bit-exact — validated by the correctness
+        smoke test.
+
+    obj_id=1 is re-registered on each call, so a single state can be
+    threaded across G rollouts of the same video.
+    """
+    if state is None:
+        state = predictor.init_state(video_path=str(imgs_dir))
+    else:
+        predictor.clear_all_points_in_video(state)
+        cached = state.get("cached_features") if isinstance(state, dict) else None
+        if cached is not None:
+            cached.clear()
+
     first = True
     for f_idx, pts in stream.points_per_frame.items():
         pts_xy = torch.tensor([[p[0], p[1]] for p in pts], dtype=torch.float32)
