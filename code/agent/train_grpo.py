@@ -91,9 +91,18 @@ def build_user_text(step: int, n_clusters: int, T: int, history: str,
 
 @dataclass
 class StepRecord:
-    """One agent-loop step's data — enough to recompute log P(action|state)."""
+    """One agent-loop step's data — enough to recompute log P(action|state).
+
+    response_token_ids is the EXACT token sequence the policy sampled
+    (including the trailing <|im_end|>), captured directly from the
+    generate() output. Storing this instead of re-tokenizing
+    decode(response_text) eliminates the BPE round-trip bias that would
+    otherwise make GRPO optimize log P(re-tokenized) instead of
+    log P(actually-sampled).
+    """
     question_text: str            # the user text (without image tokens)
-    response_text: str            # what the model sampled
+    response_text: str            # decoded text (for logging only)
+    response_token_ids: List[int] # actual sampled token ids incl. eos
     n_images: int                 # how many <image> placeholders in this turn
     pixel_values: torch.Tensor    # (n_images, 3, 448, 448) bf16 on GPU
     num_patches_list: List[int]
@@ -165,10 +174,21 @@ class SamplingInternVL3:
             eos_token_id=eos_id,
             pad_token_id=self.tok.pad_token_id or eos_id,
         )
-        new_tokens = gen[0]
-        response = self.tok.decode(new_tokens, skip_special_tokens=True).strip()
+        # InternVL3.generate routes through language_model.generate with
+        # inputs_embeds (not input_ids), so HuggingFace returns ONLY the newly
+        # generated tokens — the prompt prefix is not included. Therefore gen[0]
+        # IS the new-token sequence; do NOT slice off input_ids.shape[1].
+        new_token_ids = gen[0].tolist()
+        # Truncate at first occurrence of EOS, INCLUDING the EOS — we want the
+        # model to learn to emit it. Anything after EOS is padding from the
+        # generate() call's buffer and must NOT enter the log-prob.
+        if eos_id in new_token_ids:
+            i_eos = new_token_ids.index(eos_id)
+            new_token_ids = new_token_ids[: i_eos + 1]
+        response = self.tok.decode(new_token_ids, skip_special_tokens=True).strip()
         rec = StepRecord(
-            question_text=user_text, response_text=response, n_images=n_imgs,
+            question_text=user_text, response_text=response,
+            response_token_ids=new_token_ids, n_images=n_imgs,
             pixel_values=pixel_values, num_patches_list=num_patches_list,
         )
         return response, rec
@@ -283,9 +303,11 @@ def rollout_one(
             ):
                 stream.add(f_idx, x, y, lbl)
         elif action.type == "ADD_POS":
-            stream.add(action.frame_idx, action.x, action.y, 1)
+            f = max(0, min(int(action.frame_idx), T - 1))
+            stream.add(f, action.x, action.y, 1)
         elif action.type == "ADD_NEG":
-            stream.add(action.frame_idx, action.x, action.y, 0)
+            f = max(0, min(int(action.frame_idx), T - 1))
+            stream.add(f, action.x, action.y, 0)
 
         if stream.total_pos() == 0:
             continue
@@ -322,41 +344,112 @@ def rollout_one(
 
 
 # ---------------------------------------------------------------------------
-# Teacher-forcing log-prob computation
+# Teacher-forcing log-prob computation (single + batched)
 # ---------------------------------------------------------------------------
-def compute_step_logprob(
-    smpl: SamplingInternVL3, rec: StepRecord,
-) -> torch.Tensor:
-    """Computes Σ_t logπ(response_token_t | prompt + prior response tokens).
-    Returns a SCALAR tensor that has a graph back to LoRA params."""
+def _tokenize_record(smpl, rec: StepRecord):
+    """Returns (full_ids:list[int], prompt_len:int, response_ids:list[int]).
+
+    response_ids comes directly from rec.response_token_ids — the literal
+    sampled tokens — so log P(response_ids) is genuinely the policy's log
+    probability of the action it took, not a re-tokenized approximation.
+    """
     prompt_text = smpl._build_prompt(rec.question_text, rec.n_images)
-    response_with_end = rec.response_text + "<|im_end|>"
     prompt_ids = smpl.tok(prompt_text, add_special_tokens=False,
-                          return_tensors="pt")["input_ids"].to(smpl.device)
-    response_ids = smpl.tok(response_with_end, add_special_tokens=False,
-                            return_tensors="pt")["input_ids"].to(smpl.device)
-    if response_ids.shape[1] == 0:
-        return torch.zeros((), device=smpl.device, dtype=torch.float32)
-    full_ids = torch.cat([prompt_ids, response_ids], dim=1)
-    attn = torch.ones_like(full_ids)
-    image_flags = torch.ones(rec.n_images, dtype=torch.long, device=smpl.device)
+                          return_tensors=None)["input_ids"]
+    response_ids = list(rec.response_token_ids)
+    return list(prompt_ids), list(prompt_ids) + list(response_ids), \
+           len(prompt_ids), list(response_ids)
+
+
+def compute_step_logprob_batch(
+    smpl: SamplingInternVL3, records: List[StepRecord],
+) -> List[torch.Tensor]:
+    """Batched teacher-forcing log-prob computation.
+
+    Packs `len(records)` multimodal samples into ONE InternVL3 forward pass.
+    Each record contributes a scalar tensor Σ_t logπ(response_t | ctx).
+    The single forward holds all records' activations simultaneously — this
+    is what drives steady-state GPU memory up to ~50-70 GB on Blackwell
+    (vs ~20 GB when records are processed one-at-a-time).
+    """
+    if not records:
+        return []
+    B = len(records)
+    device = smpl.device
+    pad_id = smpl.tok.pad_token_id or smpl.tok.eos_token_id
+
+    # 1. Tokenize each record
+    full_ids_list: List[List[int]] = []
+    prompt_lens: List[int] = []
+    response_ids_list: List[List[int]] = []
+    n_images_list: List[int] = []
+    pixel_values_list: List[torch.Tensor] = []
+    num_patches_concat: List[int] = []
+    for rec in records:
+        _, full_ids, prompt_len, response_ids = _tokenize_record(smpl, rec)
+        full_ids_list.append(full_ids)
+        prompt_lens.append(prompt_len)
+        response_ids_list.append(response_ids)
+        n_images_list.append(rec.n_images)
+        pixel_values_list.append(rec.pixel_values)
+        num_patches_concat.extend(rec.num_patches_list)
+
+    max_len = max(len(x) for x in full_ids_list)
+
+    # 2. Pad input_ids + build attention_mask. Pad on the RIGHT — InternVL3 is
+    # causal, so right padding leaves the prompt+response positions intact.
+    input_ids = torch.full((B, max_len), pad_id, dtype=torch.long, device=device)
+    attn = torch.zeros((B, max_len), dtype=torch.long, device=device)
+    for i, ids in enumerate(full_ids_list):
+        L = len(ids)
+        input_ids[i, :L] = torch.tensor(ids, dtype=torch.long, device=device)
+        attn[i, :L] = 1
+
+    # 3. Concatenate pixel_values + build image_flags. Order matches the
+    # left-to-right order of <IMG_CONTEXT> blocks across samples in input_ids
+    # (we built input_ids/pixel_values in the same loop, so the ordering
+    # matches by construction). image_flags is (total_images, 1) because the
+    # model does image_flags.squeeze(-1) and the 1-D path collapses to a
+    # 0-D bool when total_images==1.
+    pixel_values = torch.cat(pixel_values_list, dim=0)
+    total_images = sum(num_patches_concat)
+    image_flags = torch.ones(total_images, 1, dtype=torch.long, device=device)
+
+    # 4. Single forward pass
     out = smpl.bm(
-        pixel_values=rec.pixel_values,
-        input_ids=full_ids,
+        pixel_values=pixel_values,
+        input_ids=input_ids,
         attention_mask=attn,
         image_flags=image_flags,
         return_dict=True,
     )
-    logits = out.logits  # (1, L, V)
-    # Predict token at position t+1 from position t.
-    L_prompt = prompt_ids.shape[1]
-    L_resp = response_ids.shape[1]
-    # We want logits at positions [L_prompt-1, L_prompt-1+1, ..., L_prompt-1+L_resp-1]
-    # to predict the response_ids at [0, 1, ..., L_resp-1].
-    target_logits = logits[0, L_prompt - 1: L_prompt - 1 + L_resp, :]   # (L_resp, V)
-    log_probs = F.log_softmax(target_logits.float(), dim=-1)
-    gather = log_probs.gather(1, response_ids[0].unsqueeze(1)).squeeze(1)  # (L_resp,)
-    return gather.sum()
+    logits = out.logits  # (B, max_len, V)
+
+    # 5. Per-sample log-prob extraction. Position-(prompt_len-1) predicts
+    # response_ids[0]; position-(prompt_len-1+L_resp-1) predicts response_ids[-1].
+    log_probs_per_rec: List[torch.Tensor] = []
+    for i in range(B):
+        L_p = prompt_lens[i]
+        L_r = len(response_ids_list[i])
+        if L_r == 0:
+            # Graph-connected zero so .backward() doesn't crash on all-empty
+            # chunks. Multiply a real logit by 0 to keep autograd happy.
+            log_probs_per_rec.append((logits[i, 0, 0] * 0.0).float())
+            continue
+        tgt = logits[i, L_p - 1: L_p - 1 + L_r, :]
+        lp = F.log_softmax(tgt.float(), dim=-1)
+        resp_t = torch.tensor(response_ids_list[i], dtype=torch.long, device=device)
+        gather = lp.gather(1, resp_t.unsqueeze(1)).squeeze(1)
+        log_probs_per_rec.append(gather.sum())
+    return log_probs_per_rec
+
+
+def compute_step_logprob(
+    smpl: SamplingInternVL3, rec: StepRecord,
+) -> torch.Tensor:
+    """Backwards-compat single-record wrapper for tests / one-off calls."""
+    out = compute_step_logprob_batch(smpl, [rec])
+    return out[0]
 
 
 # ---------------------------------------------------------------------------
@@ -365,37 +458,59 @@ def compute_step_logprob(
 def grpo_update(
     smpl: SamplingInternVL3, rollouts: List[dict],
     optimizer, max_grad_norm: float = 1.0,
+    max_batch: int = 8,
 ) -> Tuple[float, float, float]:
+    """Batched GRPO update.
+
+    Builds a flat list of all step records across all G rollouts (weighted by
+    their group-relative advantage), then chunks them into `max_batch`-sized
+    batches. Each chunk → one InternVL3 forward → one .backward(). This
+    fills the GPU with multimodal activations on every chunk forward, which
+    is the whole point of using the 96 GB Blackwell.
+
+    Gradients accumulate naturally across chunks (no zero_grad between
+    chunks); after all records processed, we step once. This is
+    mathematically equivalent to a single-shot loss = Σ w_i · logp_i
+    followed by one .backward(), but the per-chunk forward holds only
+    max_batch records' activations at once instead of all G·K_max.
+    """
     rewards = np.array([r["reward"] for r in rollouts], dtype=np.float64)
     mean_r = rewards.mean()
     std_r = rewards.std() + 1e-4
     advs = (rewards - mean_r) / std_r
 
-    optimizer.zero_grad()
-    total_loss = torch.zeros((), device=smpl.device, dtype=torch.float32)
-    n_used = 0
-    for ro, A in zip(rollouts, advs):
-        if abs(A) < 1e-6 or len(ro["step_records"]) == 0:
-            continue
-        logp_sum = torch.zeros((), device=smpl.device, dtype=torch.float32)
-        for rec in ro["step_records"]:
-            lp = compute_step_logprob(smpl, rec)
-            logp_sum = logp_sum + lp
-        # GRPO objective: maximize A * logp ⇒ minimize -A * logp / n_steps
-        # Normalize by step count to keep magnitudes comparable across rollouts.
-        n_t = max(1, len(ro["step_records"]))
-        total_loss = total_loss + (-float(A) * logp_sum / n_t)
-        n_used += 1
-
+    n_used = sum(1 for ro, A in zip(rollouts, advs)
+                  if abs(A) >= 1e-6 and len(ro["step_records"]) > 0)
     if n_used == 0:
         return 0.0, float(mean_r), float(std_r)
 
-    total_loss = total_loss / n_used
-    total_loss.backward()
+    # Flatten records into a work list of (weight, record).
+    work: List[Tuple[float, StepRecord]] = []
+    for ro, A in zip(rollouts, advs):
+        if abs(A) < 1e-6 or len(ro["step_records"]) == 0:
+            continue
+        n_t = max(1, len(ro["step_records"]))
+        w = -float(A) / (n_t * n_used)
+        for rec in ro["step_records"]:
+            work.append((w, rec))
+
+    optimizer.zero_grad()
+    total_loss_val = 0.0
+    for start in range(0, len(work), max_batch):
+        chunk = work[start:start + max_batch]
+        weights = [w for w, _ in chunk]
+        records = [r for _, r in chunk]
+        logprobs = compute_step_logprob_batch(smpl, records)
+        # Weighted sum -> scalar -> backward; chunk graph is freed afterwards.
+        chunk_loss = sum(w * lp for w, lp in zip(weights, logprobs))
+        chunk_loss.backward()
+        total_loss_val += float(chunk_loss.detach().item())
+        del chunk_loss, logprobs
+
     trainable = [p for p in smpl.model.parameters() if p.requires_grad]
     torch.nn.utils.clip_grad_norm_(trainable, max_grad_norm)
     optimizer.step()
-    return float(total_loss.item()), float(mean_r), float(std_r)
+    return total_loss_val, float(mean_r), float(std_r)
 
 
 # ---------------------------------------------------------------------------
@@ -424,7 +539,9 @@ def main():
     ap.add_argument("--traj_cache",
                     default="/root/autodl-tmp/VOSdataset/_traj_cache/TrainDataset_per_sq")
     ap.add_argument("--epochs", type=int, default=3)
-    ap.add_argument("--rollouts_per_video", type=int, default=4)
+    ap.add_argument("--rollouts_per_video", type=int, default=8,
+                    help="G — group size for GRPO. 8 gives a better baseline "
+                         "and uses the GPU we paid for.")
     ap.add_argument("--lr", type=float, default=1e-5)
     ap.add_argument("--reward_lambda", type=float, default=0.01)
     ap.add_argument("--temperature", type=float, default=0.7)
@@ -432,6 +549,11 @@ def main():
     ap.add_argument("--K_max", type=int, default=5)
     ap.add_argument("--max_videos_per_epoch", type=int, default=0,
                     help="0 means use all train videos")
+    ap.add_argument("--grad_ckpt", action="store_true",
+                    help="re-enable gradient checkpointing (slower, less memory)")
+    ap.add_argument("--max_batch", type=int, default=8,
+                    help="records batched per backward pass. Higher → more "
+                         "GPU memory used and fewer .backward() calls.")
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
 
@@ -452,7 +574,10 @@ def main():
         low_cpu_mem_usage=True,
     ).to("cuda")
     model = PeftModel.from_pretrained(base_model, args.bc_lora, is_trainable=True)
-    model.gradient_checkpointing_enable()
+    # NOTE: keep gradient checkpointing OFF — we have 96 GB to spend and the
+    # speedup matters more than memory savings on a Blackwell.
+    if args.grad_ckpt:
+        model.gradient_checkpointing_enable()
     n_train = sum(p.numel() for p in model.parameters() if p.requires_grad)
     n_total = sum(p.numel() for p in model.parameters())
     print(f"[init] trainable params: {n_train:,} / {n_total:,} "
@@ -519,7 +644,8 @@ def main():
 
             model.train()
             t_u0 = time.time()
-            loss, mean_r, std_r = grpo_update(smpl, rollouts, opt)
+            loss, mean_r, std_r = grpo_update(smpl, rollouts, opt,
+                                                max_batch=args.max_batch)
             sched.step()
             t_update = time.time() - t_u0
             global_step += 1

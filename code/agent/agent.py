@@ -350,9 +350,11 @@ def run_agent_on_video(
                 stream.add(f_idx, x, y, lbl)
 
         elif action.type == "ADD_POS":
-            stream.add(action.frame_idx, action.x, action.y, 1)
+            f = max(0, min(int(action.frame_idx), T - 1))
+            stream.add(f, action.x, action.y, 1)
         elif action.type == "ADD_NEG":
-            stream.add(action.frame_idx, action.x, action.y, 0)
+            f = max(0, min(int(action.frame_idx), T - 1))
+            stream.add(f, action.x, action.y, 0)
 
         # Execute current prompt stream
         if stream.total_pos() == 0:
