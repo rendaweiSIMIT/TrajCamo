@@ -166,7 +166,8 @@ def cluster_to_prompt_points(
 class InternVL3Agent:
     """Thin wrapper around InternVL3's `.chat(...)` API. Hides image preprocessing."""
 
-    def __init__(self, model_path: str, dtype=torch.bfloat16, device="cuda"):
+    def __init__(self, model_path: str, lora_path: str = None,
+                 dtype=torch.bfloat16, device="cuda"):
         from transformers import AutoTokenizer, AutoModel
         self.tokenizer = AutoTokenizer.from_pretrained(model_path,
                                                         trust_remote_code=True,
@@ -174,10 +175,22 @@ class InternVL3Agent:
         self.model = AutoModel.from_pretrained(
             model_path, torch_dtype=dtype, trust_remote_code=True,
             low_cpu_mem_usage=True,
-        ).to(device).eval()
+        ).to(device)
+        if lora_path:
+            from peft import PeftModel
+            self.model = PeftModel.from_pretrained(self.model, lora_path)
+            # Set img_context_token_id on the base model (LoRA wrap shadows it)
+            ctx_id = self.tokenizer.convert_tokens_to_ids("<IMG_CONTEXT>")
+            target = (self.model.base_model.model
+                       if hasattr(self.model, "base_model") else self.model)
+            if hasattr(target, "img_context_token_id"):
+                target.img_context_token_id = ctx_id
+            print(f"[InternVL3Agent] loaded {model_path} + LoRA {lora_path}", flush=True)
+        else:
+            print(f"[InternVL3Agent] loaded {model_path}", flush=True)
+        self.model.eval()
         self.device = device
         self.dtype = dtype
-        print(f"[InternVL3Agent] loaded {model_path}", flush=True)
 
     def _preprocess(self, pil_image: Image.Image, image_size=448, max_num=6):
         """InternVL3's dynamic-tile preprocessing. Returns pixel_values tensor

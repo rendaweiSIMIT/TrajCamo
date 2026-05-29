@@ -3,7 +3,7 @@
 **Target venue**: IEEE Transactions on Circuits and Systems for Video Technology (TCSVT)
 **Timeline**: ~2–3 months of focused work
 **Owner**: rendaweiSIMIT
-**Last updated**: 2026-05-29
+**Last updated**: 2026-05-29 (Stage A.5 complete: BC-agent F_w 0.334 ≥ 0.230 gate ✓)
 
 > This file is the single source of truth for what we're building, in what
 > order, and where we currently are. **Read this before opening other files.**
@@ -82,25 +82,25 @@ Goal: end-to-end agent inference + first BC-trained agent number on MoCA-Mask te
   5 actions all parse, MLLM↔SAM3 round-trip stable, F_w=0.0 (expected)
 
 **A.3 Oracle action generator** (`code/agent/oracle.py`)
-- 🟡 Implemented: greedy `SELECT(argmax-IoU cluster)` → `Add-Pos/Add-Neg` corrections at worst-IoU frame → `Terminate` at IoU ≥ 0.85 or K_max=5
-- 🟡 **Running on all 71 train videos right now** — outputs go to `agent_outputs/oracle/`
-- ☐ Inspect oracle quality: action-length distribution, final-IoU histogram, percentage of videos converging to IoU ≥ 0.85
+- ✅ Implemented: greedy `SELECT(argmax-IoU cluster)` → `Add-Pos/Add-Neg` corrections at worst-IoU frame → `Terminate` at IoU ≥ 0.85 or K_max=5
+- ✅ Generated **192 (state, action) samples across 70 train videos** → `agent_outputs/oracle/index.jsonl`
+- ✅ Inspected: avg 2.7 steps/video; ~30% videos hit IoU ≥ 0.85 within K=5
 
 **A.4 BC (behavior cloning) training loop** (`code/agent/train_bc.py`)
-- ☐ Build HuggingFace `Dataset` from oracle's `index.jsonl`
-- ☐ Multimodal data collator (text + 2-3 PIL images per sample)
-- ☐ Wrap InternVL3 with rank-16 LoRA on attention + MLP projections
-- ☐ TRL `SFTTrainer` with autoregressive loss on **action tokens only**
-- ☐ Smoke train on InternVL3-2B + 5 videos for 1 epoch (verify gradient flow)
-- ☐ Full train on InternVL3-8B + 71 videos for 30 epochs (~3-4h on Blackwell)
-- ☐ Save best LoRA adapter to `VOScode/agent_outputs/bc_ckpt/`
+- ✅ Built `OracleBCDataset` reading `index.jsonl`; custom `BCCollator` does multimodal tokenization (`<img><IMG_CONTEXT>...</img>` + chat template) with loss masked to action tokens only
+- ✅ LoRA rank-16 on `q_proj/k_proj/v_proj/o_proj/gate_proj/up_proj/down_proj`
+- ✅ Custom training loop (not HF Trainer — InternVL3's forward needs `image_flags`)
+- ✅ Smoke on InternVL3-2B (192 steps, 38 s, loss 0 → 1.0) — gradient flow confirmed
+- ✅ Full on InternVL3-8B: 10 epochs × 96 batches = 960 steps in **598 s** on Blackwell, final loss **0.024**
+- ✅ LoRA adapter saved → `VOScode/agent_outputs/bc_8b/lora_final/` (162 MB)
 
 **A.5 First trained-agent eval on test set**
-- ☐ Load BC-trained agent, run on all 16 MoCA-Mask test videos
-- ☐ Compare BC-agent vs untrained-agent vs phase-2-heuristic on F_w/MAE/S_a/E_p
-- ☐ Save per-video metrics to `results/agent_bc_first.json`
-- ☐ **Hard gate for Stage B**: BC-agent F_w ≥ heuristic-agent F_w (= 0.230).
-  If lower, debug data quality / loss masking / LoRA target modules before RL.
+- ✅ Modified `agent.py` / `infer.py` to load LoRA via `--lora <path>`
+- ✅ Ran BC-trained 8B agent on all 16 MoCA-Mask test videos
+- ✅ Aggregate: **F_w 0.334**, MAE 0.179, S_a 0.507, E_p 0.569 — saved to `results/agent_bc_first.json`
+- ✅ **Hard gate PASSED**: 0.334 ≥ 0.230 heuristic baseline (+45% relative)
+- ✅ Top per-video: moth 0.890 · black_cat_1 0.813 · hedgehog_3 0.779 · arctic_fox 0.710
+- ☐ Diagnose 4 zero-F_w failures (flower_crab_spider_{1,2}, sand_cat_0, arctic_fox_3): cluster selection vs SAM3 prop?
 
 **A.6 Stage A review**
 - ☐ Decide whether action vocab is sufficient (or add `Merge` / `Split`)

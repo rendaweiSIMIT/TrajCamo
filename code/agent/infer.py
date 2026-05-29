@@ -70,6 +70,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mllm", default="/root/autodl-tmp/models/InternVL3-2B",
                     help="path to InternVL3 model dir")
+    ap.add_argument("--lora", default=None,
+                    help="path to a trained LoRA adapter directory (optional)")
     ap.add_argument("--video", default=None,
                     help="single video name (e.g. arctic_fox)")
     ap.add_argument("--all", action="store_true",
@@ -90,7 +92,7 @@ def main():
     print(f"[init] loading SAM 3 ...", flush=True)
     sam3 = build_sam3()
     print(f"[init] loading MLLM from {args.mllm} ...", flush=True)
-    mllm = InternVL3Agent(args.mllm)
+    mllm = InternVL3Agent(args.mllm, lora_path=args.lora)
     print(f"[init] ready.", flush=True)
 
     test_root = args.dataset / "TestDataset_per_sq"
