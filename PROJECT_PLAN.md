@@ -3,7 +3,7 @@
 **Target venue**: IEEE Transactions on Circuits and Systems for Video Technology (TCSVT)
 **Timeline**: ~2–3 months of focused work
 **Owner**: rendaweiSIMIT
-**Last updated**: 2026-05-29 (Stage A.5 complete: BC-agent F_w 0.334 ≥ 0.230 gate ✓)
+**Last updated**: 2026-05-29 (Stage A complete; Stage B.3 GRPO RL training running, ETA ~11 h)
 
 > This file is the single source of truth for what we're building, in what
 > order, and where we currently are. **Read this before opening other files.**
@@ -111,27 +111,31 @@ Goal: end-to-end agent inference + first BC-trained agent number on MoCA-Mask te
 Goal: trained agent that beats heuristic on at least 3/4 COD metrics on MoCA-Mask test.
 
 **B.1 Improved Kinematic Signature Encoder (v2)**
-- ☐ Add cross-video negatives + hard-negative mining
-- ☐ Train v2; re-eval on the encoder-ablation row (currently F_w 0.281 v1)
-- ☐ If v2 beats raw-velocity (0.507 oracle), bake into the agent pipeline
+- ✅ `code/phase4_train_signature_encoder_v2.py` written: cross-video pool, SupCon loss, hard-negative mining (refresh every 2 epochs)
+- ☐ Train v2 (queued — runs after GRPO frees the GPU; ~30 min)
+- ☐ Re-eval on encoder-ablation row vs v1 (F_w 0.281) and raw velocity (F_w 0.507)
+- ☐ If v2 beats raw-velocity, bake into agent pipeline
 
-**B.2 BC training, hardened**
-- ☐ Multi-epoch full run with logged train/val loss and per-epoch IoU on a held-out val split
-- ☐ Save best checkpoint by val IoU
+**B.2 BC training, hardened** (lifting from A.4)
+- ✅ Initial BC done in A.4 with action-token-only loss, 10 epochs, final loss 0.024
+- ☐ Multi-epoch BC with train/val split + best-by-val-IoU (queued for after GRPO eval)
 
-**B.3 RL fine-tuning with GRPO**
-- ☐ Reward = `IoU(M_final, M_GT) − λ · step_count`, `λ = 0.01`
-- ☐ 4 rollouts per video, ~5 RL epochs
-- ☐ TRL `GRPOTrainer` configured for multimodal inputs (custom rollout function)
-- ☐ Save RL-tuned adapter to `VOScode/agent_outputs/rl_ckpt/`
+**B.3 RL fine-tuning with GRPO** (`code/agent/train_grpo.py`)
+- ✅ Custom multimodal GRPO loop (no TRL — InternVL3's forward needs `image_flags`)
+- ✅ Reward = `mean_F_w(M_final, M_GT) − 0.01 · step_count`
+- ✅ G=4 rollouts per video, group-relative advantage, no KL/clip
+- ✅ Smoke passed (2 vids × 2 rollouts × 3 steps: loss −0.007, gradients flow)
+- 🟡 **Full RL training running** (3 epochs × 70 train videos × 4 rollouts, ETA ~11 h)
+  - First 3 steps: F_w on hedgehog_1 = 0.74 [0.09, 0.96] (high variance, real learning signal)
+- ☐ Save RL-tuned adapter (`grpo_8b/lora_best`) once epochs finish
 
-**B.4 Agent ablations (paper §5.5)**
-- ☐ Full agent vs single-shot (`K_max=1`, SELECT-only)
-- ☐ Action-vocab subsets: drop `Add-Pos`, drop `Add-Neg`, both dropped
-- ☐ BC-only vs BC+RL
-- ☐ Language-anchored cluster vs top-consistency cluster
-- ☐ Trajectory-as-memory vs SAM2-mask-memory-only
-- ☐ Compile all into `results/AGENT_ABLATIONS.md`
+**B.4 Agent ablations (paper §5.5)** (`code/agent/run_agent_ablations.py`)
+- ✅ Runner written: 5 configs (R1 RL+full+K5, R2 RL+SELECT-only+K1, R3 RL−ADD_POS+K5, R4 RL−ADD_NEG+K5, R5 BC+full+K5)
+- ✅ `forbid_actions` kwarg added to `run_agent_on_video` for vocab subsets
+- ☐ Run 5 ablations on 16 test videos (queued for after GRPO + RL eval; ~20 min)
+- ☐ Compile into `results/AGENT_ABLATIONS.md`
+- ☐ Language-anchored cluster vs top-consistency cluster (lower priority — needs DINOv2 query encoder; defer to Stage C)
+- ☐ Trajectory-as-memory vs SAM2-mask-memory-only (defer — SAM 3 already provides mask memory)
 
 ### Stage C — Polish & paper-ready (Week 5-6)
 
