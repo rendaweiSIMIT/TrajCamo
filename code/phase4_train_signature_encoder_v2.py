@@ -173,17 +173,29 @@ def compute_all_embeddings(model, pool_feats: np.ndarray,
 
 @torch.no_grad()
 def find_hard_negatives(emb: torch.Tensor, labels: np.ndarray,
-                        K: int = 16) -> np.ndarray:
+                        K: int = 16, chunk: int = 4096) -> np.ndarray:
     """For each anchor, return indices of the K closest differently-labeled
-    trajectories in the pool. Returns (N, K) int."""
+    trajectories in the pool. Returns (N, K) int.
+
+    Chunked by anchor rows so we never materialize the full N×N similarity
+    matrix (14 GB at N=123 k for bf16). Each chunk holds a (chunk × N)
+    similarity slab, ~500 MB for chunk=4 k and N=123 k.
+    """
     N = emb.size(0)
     lab = torch.from_numpy(labels).to(emb.device)
-    sim = emb @ emb.T               # (N, N)
-    diff = (lab.unsqueeze(0) != lab.unsqueeze(1))
-    sim[~diff] = -1e4               # mask same-label
-    sim.fill_diagonal_(-1e4)
-    topk = torch.topk(sim, k=K, dim=1).indices    # (N, K)
-    return topk.cpu().numpy()
+    out = np.empty((N, K), dtype=np.int64)
+    for i in range(0, N, chunk):
+        j = min(i + chunk, N)
+        sim_chunk = emb[i:j] @ emb.T            # (j-i, N)
+        same = (lab[i:j].unsqueeze(1) == lab.unsqueeze(0))   # (j-i, N)
+        sim_chunk[same] = -1e4                  # mask same-label
+        # mask self-similarity (diagonal of the chunk)
+        diag_idx = torch.arange(i, j, device=emb.device)
+        sim_chunk[torch.arange(j - i, device=emb.device), diag_idx] = -1e4
+        topk = torch.topk(sim_chunk, k=K, dim=1).indices    # (j-i, K)
+        out[i:j] = topk.cpu().numpy()
+        del sim_chunk, same, topk
+    return out
 
 
 def main():
