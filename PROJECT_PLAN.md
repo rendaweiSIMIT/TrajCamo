@@ -103,8 +103,8 @@ Goal: end-to-end agent inference + first BC-trained agent number on MoCA-Mask te
 - ☐ Diagnose 4 zero-F_w failures (flower_crab_spider_{1,2}, sand_cat_0, arctic_fox_3): cluster selection vs SAM3 prop?
 
 **A.6 Stage A review**
-- ☐ Decide whether action vocab is sufficient (or add `Merge` / `Split`)
-- ☐ Decide whether per-step BC supervision is sufficient or needs auxiliary losses
+- ✅ **Action vocab: KEEP 4 actions, do NOT add Merge/Split.** Evidence: in the BC-agent's 80 test-set actions, ADD_NEG and TERMINATE were each used 0 times — the failures are policy bias (BC data was ADD_POS-heavy), not a vocab gap. Adding more verbs would just dilute the action distribution further.
+- ✅ **No auxiliary BC losses — go straight to RL.** BC passed the hard gate (+45%) but the failure mode is "agent picks wrong cluster, then repeats the same ADD_POS coordinate 3×" — a missing-reward-signal symptom, not a loss-design problem. GRPO with mask-IoU reward targets this directly.
 
 ### Stage B — Full BC + RL training (Week 3-4)
 
